@@ -1,0 +1,49 @@
+header {
+    text-align: center;
+    height: 192px;
+    border-bottom: solid black 3px;
+    border-top: solid black 3px;
+    background-image: url("../images/global/Fond.png");
+}
+
+#logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+nav {
+    background-color: black;
+    text-align: center;
+    height:40px;
+    padding-top:13px;
+}
+
+
+nav a{
+    background: #cfccc1;
+    background-image: -webkit-linear-gradient(top, #cfccc1, #b4AD95);
+    background-image: -moz-linear-gradient(top, #cfccc1, #b4AD95);
+    background-image: -ms-linear-gradient(top, #cfccc1, #b4AD95);
+    background-image: -o-linear-gradient(top, #cfccc1, #b4AD95);
+    background-image: linear-gradient(to bottom, #cfccc1, #b4AD95);
+    -webkit-border-radius: 4;
+    -moz-border-radius: 4;
+    border-radius: 4px;
+    text-shadow: 8px 5px 3px #444444;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 22px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background: #b4AD95;
+    background-image: -webkit-linear-gradient(top, #b4AD95, #cfccc1);
+    background-image: -moz-linear-gradient(top, #b4AD95, #cfccc1);
+    background-image: -ms-linear-gradient(top, #b4AD95, #cfccc1);
+    background-image: -o-linear-gradient(top, #b4AD95, #cfccc1);
+    background-image: linear-gradient(to bottom, #b4AD95, #cfccc1);
+    text-decoration: none;
+}
