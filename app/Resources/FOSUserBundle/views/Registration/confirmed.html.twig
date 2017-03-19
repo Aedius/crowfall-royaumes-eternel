@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+
+    <div class="youplay-banner banner-top">
+        <div class="image" style="background-image: url('/assets/images/banner-bg.jpg')">
+        </div>
+
+        <div class="info">
+            <div>
+                <div class="container align-center">
+                    <div class="youplay-form">
+
+                        <h1>Bienvenue</h1>
+
+                        <div class="alert alert-primary" role="alert">
+                            {{ 'registration.confirmed'|trans({'%username%': user.username}) }}
+                        </div>
+
+                        {% if targetUrl %}
+                            <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
