@@ -45,7 +45,7 @@ class Version
     /**
      * @var Article[]
      *
-     * @ORM\OneToMany(targetEntity="Article", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="version")
      */
     private $articleList;
 
@@ -128,7 +128,7 @@ class Version
      */
     public function __toString()
     {
-        return $this->getName();
+        return $this->getName() ?? '';
     }
 
     /**

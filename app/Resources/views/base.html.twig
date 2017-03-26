@@ -208,20 +208,30 @@
                                 </li>
                                 <li class="divider"></li>
 
-                                <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+
                                 </li>
-                                <li class="dropdown dropdown-submenu pull-left">
-                                    <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                       aria-expanded="false">More..</a>
-                                    <div class="dropdown-menu">
-                                        <ul role="menu">
-                                            <li><a href="#!">3rd level</a>
-                                            </li>
-                                            <li><a href="#!">3rd level</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
+                                {% if is_granted("ROLE_ADMIN") %}
+                                    <li class="dropdown dropdown-submenu pull-left">
+                                        <a href="admin/dashboard" class="dropdown-toggle" data-toggle="dropdown"
+                                           role="button"
+                                           aria-expanded="false">Admin</a>
+                                        <div class="dropdown-menu">
+                                            <ul role="menu">
+                                                <li>
+                                                    <a href="admin/app/category/list">Category</a>
+                                                </li>
+                                                <li>
+                                                    <a href="admin/app/version/list">Version</a>
+                                                </li>
+                                                <li>
+                                                    <a href="admin/app/article/list">Article</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                                <li>
+                                    <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
                             </ul>
                         </div>
                     {% else %}
@@ -292,11 +302,9 @@
 
 
 <!-- Main Content -->
-<section class="content-wrap">
 
-    {% block body %}{% endblock %}
+{% block body %}{% endblock %}
 
-</section>
 <!-- /Main Content -->
 
 

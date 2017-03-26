@@ -3,6 +3,7 @@
 
 {% block body %}
 
+    <section class="content-wrap full youplay-login">
     <div class="youplay-banner banner-top">
         <div class="image" style="background-image: url('/assets/images/banner-bg.jpg')">
         </div>
@@ -13,13 +14,8 @@
                     <div class="youplay-form">
 
 
-                        <h1>Login</h1>
 
-                        {#<div class="btn-group social-list dib">
-                            <a class="btn btn-default" title="Share on Facebook" href="#!"><i class="fa fa-facebook"></i></a>
-                            <a class="btn btn-default" href="#!" title="Share on Twitter"><i class="fa fa-twitter"></i></a>
-                            <a class="btn btn-default" href="#!" title="Share on Google Plus"><i class="fa fa-google-plus"></i></a>
-                        </div>#}
+                        <h1>Login</h1>
 
                         <form action="{{ path("fos_user_security_check") }}" method="post">
 
@@ -43,10 +39,16 @@
                             <button class="btn btn-default db" type="submit" id="_submit"
                                     name="_submit">{{ 'security.login.submit'|trans }}</button>
                         </form>
+
+                    </div>
+                    <div class="btn-group social-list dib">
+                        <a class="btn btn-default" href="register" title="Inscription">Inscription</a>
+                        <a class="btn btn-default" href="#TODO" title="Password Oublié">Password oublié</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </section>
 
 {% endblock %}

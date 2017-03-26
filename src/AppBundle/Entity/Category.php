@@ -43,12 +43,6 @@ class Category
     private $articleList;
 
     /**
-     * @var Zone
-     * @ORM\ManyToOne(targetEntity="Zone", inversedBy="categoryList")
-     */
-    private $zone;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -107,27 +101,11 @@ class Category
     }
 
     /**
-     * @return mixed
-     */
-    public function getZone()
-    {
-        return $this->zone;
-    }
-
-    /**
-     * @param mixed $zone
-     */
-    public function setZone($zone)
-    {
-        $this->zone = $zone;
-    }
-
-    /**
      * @return string
      */
     public function __toString()
     {
-        return $this->getName();
+        return $this->getName() ?? '';
     }
 
     /**

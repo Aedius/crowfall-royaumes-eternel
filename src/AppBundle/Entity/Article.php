@@ -64,11 +64,15 @@ class Article
     private $publishedAt;
 
     /**
+     * @var Category
+     *
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="articleList")
      */
     private $category;
 
     /**
+     * @var Version
+     *
      * @ORM\ManyToOne(targetEntity="Version", inversedBy="articleList")
      */
     private $version;
@@ -97,7 +101,7 @@ class Article
     }
 
     /**
-     * @return mixed
+     * @return Version
      */
     public function getVersion()
     {
@@ -105,7 +109,7 @@ class Article
     }
 
     /**
-     * @param mixed $version
+     * @param Version $version
      */
     public function setVersion($version)
     {
@@ -121,30 +125,6 @@ class Article
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Get titre
-     *
-     * @return string
-     */
-    public function getTitre()
-    {
-        return $this->titre;
-    }
-
-    /**
-     * Set titre
-     *
-     * @param string $titre
-     *
-     * @return Article
-     */
-    public function setTitre($titre)
-    {
-        $this->titre = $titre;
-
-        return $this;
     }
 
     /**
@@ -282,5 +262,38 @@ class Article
     {
         $this->category = $category;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getTitre() ?? '';
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     *
+     * @return Article
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
 }
 
