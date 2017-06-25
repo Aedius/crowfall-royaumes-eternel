@@ -2,18 +2,101 @@
 
 namespace AppBundle\Controller\Writer;
 
+use AppBundle\Entity\Article;
+use AppBundle\Entity\Category;
+use AppBundle\Entity\Version;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class DefaultController
+ * @package AppBundle\Controller\Writer
+ */
 class DefaultController extends Controller
 {
 
     /**
-     * @Route("/new-article", name="writer-article-new")
+     * @Route("writer/article", name="writer-article-edit")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function articleAction(Request $request)
     {
+        $em = $this->get('doctrine.orm.default_entity_manager');
 
+        // create a article and give it some dummy data for this example
+        $article = new Article();
 
+        $fb = $this->createFormBuilder($article);
+
+        $fb->add('titre', TextType::class, [
+            'label' => 'titre',
+        ]);
+
+        $fb->add('slug', TextType::class, [
+            'label' => 'slug',
+        ]);
+
+        $fb->add('content', TextareaType::class, [
+            'label' => 'contenu',
+        ]);
+
+        $fb->add('image', TextType::class, [
+            'label' => 'image',
+        ]);
+
+        $fb->add('published', ChoiceType::class, [
+            'choices' => [
+                'Publier' => true,
+                'Non Publié' => false,
+            ],
+            'label' => 'publié',
+        ]);
+
+        $fb->add('category', EntityType::class, [
+            'label' => 'Catégorie',
+            'class' => Category::class
+        ]);
+
+        $fb->add('version', EntityType::class, [
+            'class' => Version::class,
+            'label' => 'Version',
+        ]);
+
+        $form = $fb->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($article->getPublished() && !$article->getPublishedAt()) {
+                $article->setPublishedAt(new \DateTime());
+            }
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                try {
+                    $em->persist($article);
+                    $em->flush();
+
+                    $this->addFlash('success', 'article enregistré avec succès');
+                } catch (UniqueConstraintViolationException $e) {
+                    $this->addFlash('warning', 'not unique title or slug');
+                } catch (\Exception $e) {
+                    $this->addFlash('danger', 'something gores wrong');
+                }
+            }
+        }
+
+        return $this->render('global/form.html.twig', [
+            'title' => 'Article',
+            'form' => $form->createView(),
+            'submit_button' => 'save article',
+        ]);
     }
 }

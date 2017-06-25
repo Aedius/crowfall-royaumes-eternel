@@ -194,7 +194,7 @@
                             <ul role="menu">
                                 {% if is_granted("ROLE_WRITER") %}
                                     <li>
-                                        <a href="{{ path('writer-article-new') }}">nouvel article</a>
+                                        <a href="{{ path('writer-article-edit') }}">nouvel article</a>
                                     </li>
 
                                     <li class="divider"></li>
@@ -210,7 +210,7 @@
                                         <div class="dropdown-menu">
                                             <ul role="menu">
                                                 <li>
-                                                    <a href="admin/app/category/list">Category</a>
+                                                    <a href="{{ path('admin-category-edit') }}">New Category</a>
                                                 </li>
                                                 <li>
                                                     <a href="admin/app/version/list">Version</a>

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Category
@@ -25,6 +26,7 @@ class Category
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -32,8 +34,17 @@ class Category
      * @var string
      *
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     * @Assert\NotBlank()
      */
     private $slug;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     * @Assert\NotBlank()
+     */
+    private $description;
 
     /**
      * @var Article[]
@@ -41,13 +52,6 @@ class Category
      * @ORM\OneToMany(targetEntity="Article", mappedBy="category")
      */
     private $articleList;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text", nullable=true)
-     */
-    private $description;
 
 
     /**

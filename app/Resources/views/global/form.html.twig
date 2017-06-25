@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form _self %}
+
+
+{% block choice_row %}
+    {% spaceless %}
+        {{ form_label(form) }}  {{ form_errors(form) }}
+        <div class="youplay-select">
+            {{ form_widget(form) }}
+        </div>
+        <br/>
+    {% endspaceless %}
+{% endblock choice_row %}
+
+{% block form_row %}
+    {% spaceless %}
+        <div class="youplay-input">
+            {{ form_errors(form) }}
+            {{ form_widget(form, { 'attr': { 'placeholder': form.vars.label} }) }}
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block body %}
+    <section class="content-wrap full youplay">
+
+        <div class="youplay-banner banner-top">
+            <div class="image" style="background-image: url('/assets/images/banner-bg.jpg')">
+            </div>
+            <div class="info">
+                <div>
+                    <div class="container align-center">
+
+                        {% for label, messages in app.flashes %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ label }}" role="alert">
+                                    <strong>{{ label }}</strong> {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+
+                        <div class="youplay-form">
+
+                            <h1>{{ title }}</h1>
+                            <div>
+                                {{ form_start(form) }}
+                                {{ form_widget(form) }}
+                                <div>
+                                    <button class="btn btn-default db" type="submit" id="_submit"
+                                            name="_submit">{{ submit_button }}</button>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

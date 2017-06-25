@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Article
@@ -25,13 +26,15 @@ class Article
      * @var string
      *
      * @ORM\Column(name="titre", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $titre;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)*
+     * @Assert\NotBlank()
      */
     private $slug;
 
@@ -60,6 +63,7 @@ class Article
      * @var \DateTime
      *
      * @ORM\Column(name="publishedAt", type="datetime", nullable=true)
+     * @Assert\Type("\DateTime")
      */
     private $publishedAt;
 
@@ -67,6 +71,7 @@ class Article
      * @var Category
      *
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="articleList")
+     * @Assert\NotBlank()
      */
     private $category;
 
