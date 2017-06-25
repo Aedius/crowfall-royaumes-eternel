@@ -9,6 +9,6 @@ writer:
     resource: "@AppBundle/Controller/Writer"
     type:     annotation
 
-admlin:
-    resource: "@AppBundle/Controller/Admin"
-    type:     annotation
+#admin:
+#    resource: "@AppBundle/Controller/Admin"
+#    type:     annotation
