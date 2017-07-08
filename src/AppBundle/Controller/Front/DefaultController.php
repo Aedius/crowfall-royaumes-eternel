@@ -2,11 +2,14 @@
 
 namespace AppBundle\Controller\Front;
 
+use AppBundle\Entity\Article;
+use AppBundle\Repository\ArticleRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
+
     /**
      * @Route("/", name="homepage")
      */
@@ -63,10 +66,48 @@ class DefaultController extends Controller
 
         shuffle($archetypeList);
 
-        // replace this example code with whatever you need
+        $articleList = $this->getDoctrine()
+            ->getRepository('AppBundle:Article')
+            ->findBy(
+                array('published' => true),
+                array('publishedAt' => 'desc'),
+                5
+            );
+
+
         return $this->render('index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
             'archetypeList' => $archetypeList,
+            'articleList' => $articleList,
         ]);
+    }
+
+
+    /**
+    @Route("/article/{id}/{slug}", name="article_show", requirements={"id": "\d+"})
+     */
+    public function articleAction($id, $slug)
+    {
+        /** @var ArticleRepository $repo */
+        $articleRepository = $this->getDoctrine()->getRepository('AppBundle:Article');
+
+        /** @var Article|null $article */
+        $article = $articleRepository->find($id);
+
+        if($article === null || !$article->getPublished()) {
+            throw $this->createNotFoundException('L\'article n\'est pas disponible');
+        }
+
+        if($article->getSlug() != $slug){
+            return $this->redirectToRoute($this->container->get('router')->generate(
+                'article_show',
+                array('slug' => $article->getSlug(),
+                    'id' => $article->getId())
+            ));
+        }
+
+        return $this->render('show/article.html.twig', [
+            'article' => $article,
+        ]);
+
     }
 }
