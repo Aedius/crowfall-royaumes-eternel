@@ -43,3 +43,7 @@ _ressources
 
 # Backup entities generated with doctrine:generate:entities command
 */Entity/*~
+
+# uploaded file
+/web/upload/
+!/web/upload/.gitkeep

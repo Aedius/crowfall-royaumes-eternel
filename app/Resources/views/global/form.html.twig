@@ -13,14 +13,46 @@
     {% endspaceless %}
 {% endblock choice_row %}
 
+{% block textarea_widget %}
+    {% spaceless %}
+        <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+    {% endspaceless %}
+{% endblock textarea_widget %}
+
 {% block form_row %}
     {% spaceless %}
-        <div class="youplay-input">
-            {{ form_errors(form) }}
-            {{ form_widget(form, { 'attr': { 'placeholder': form.vars.label} }) }}
-        </div>
+        {% if 'textarea' in form.vars.block_prefixes %}
+            <div>
+                {{ form_errors(form) }}
+                {{ form_widget(form, { 'attr': { 'placeholder': form.vars.label} }) }}
+            </div>
+        {% else %}
+            <div class="youplay-input">
+                {{ form_errors(form) }}
+                {{ form_widget(form, { 'attr': { 'placeholder': form.vars.label} }) }}
+            </div>
+        {% endif %}
     {% endspaceless %}
 {% endblock form_row %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="/assets/plugins/tinymce/js/tinymce/tinymce.min.js"></script>
+
+    <script type="text/javascript">
+        tinymce.init({
+            selector: 'textarea',
+            height: 500,
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table contextmenu paste code'
+            ],
+            toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            content_css: []
+        });
+    </script>
+{% endblock %}
 
 {% block body %}
     <section class="content-wrap full youplay">

@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 /**
  * Class DefaultController
@@ -47,8 +48,14 @@ class DefaultController extends Controller
             'label' => 'contenu',
         ]);
 
-        $fb->add('image', TextType::class, [
-            'label' => 'image',
+        $fb->add('imageFile', VichImageType::class, [
+            'required' => true,
+            'allow_delete' => true,
+            'download_label' => function (Article $article) {
+                return $article->getSlug().'/image';
+            },
+            'download_uri' => true,
+            'image_uri' => true,
         ]);
 
         $fb->add('published', ChoiceType::class, [
