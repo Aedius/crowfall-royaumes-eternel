@@ -83,7 +83,10 @@ class DefaultController extends Controller
 
 
     /**
-    @Route("/article/{id}/{slug}", name="article_show", requirements={"id": "\d+"})
+     * @Route("/article/{id}/{slug}", name="article_show", requirements={"id": "\d+"})
+     * @param $id
+     * @param $slug
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function articleAction($id, $slug)
     {
@@ -93,16 +96,17 @@ class DefaultController extends Controller
         /** @var Article|null $article */
         $article = $articleRepository->find($id);
 
-        if($article === null || !$article->getPublished()) {
+        if ($article === null || !$article->getPublished()) {
             throw $this->createNotFoundException('L\'article n\'est pas disponible');
         }
 
-        if($article->getSlug() != $slug){
-            return $this->redirectToRoute($this->container->get('router')->generate(
-                'article_show',
-                array('slug' => $article->getSlug(),
-                    'id' => $article->getId())
-            ));
+        if ($article->getSlug() != $slug) {
+            return $this->redirectToRoute(
+                $this->generateUrl(
+                    'article_show',
+                    ['slug' => $article->getSlug(),
+                        'id' => $article->getId()]
+                ));
         }
 
         return $this->render('show/article.html.twig', [

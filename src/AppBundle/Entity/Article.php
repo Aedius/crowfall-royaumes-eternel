@@ -102,6 +102,14 @@ class Article
     private $version;
 
     /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="articleList")
+     * @Assert\NotBlank()
+     */
+    private $author;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="home", type="boolean")
@@ -345,6 +353,22 @@ class Article
         $this->titre = $titre;
 
         return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getAuthor(): User
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param User $author
+     */
+    public function setAuthor(User $author)
+    {
+        $this->author = $author;
     }
 
 }

@@ -76,6 +76,9 @@ class DefaultController extends Controller
             'label' => 'Version',
         ]);
 
+
+        $article->setAuthor($this->getUser());
+
         $form = $fb->getForm();
 
         $form->handleRequest($request);
@@ -85,6 +88,7 @@ class DefaultController extends Controller
             if ($article->getPublished() && !$article->getPublishedAt()) {
                 $article->setPublishedAt(new \DateTime());
             }
+
 
             if ($form->isSubmitted() && $form->isValid()) {
                 try {
