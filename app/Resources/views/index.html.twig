@@ -53,7 +53,8 @@
                 <div class="news-one">
                     <div class="row vertical-gutter">
                         <div class="col-md-4">
-                            <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}" class="angled-img">
+                            <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}"
+                               class="angled-img">
                                 <div class="img">
                                     <img src="{{ vich_uploader_asset(article, 'imageFile') }}"
                                          alt="image for : {{ article.titre }}"/>
@@ -68,10 +69,11 @@
                         </div>
                         <div class="col-md-8">
                             <div class="clearfix">
-                                <h3 class="h2 pull-left m-0"><a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}">{{ article.titre }}</a>
+                                <h3 class="h2 pull-left m-0"><a
+                                            href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}">{{ article.titre }}</a>
                                 </h3>
                                 <span class="date pull-right"><i
-                                            class="fa fa-calendar"></i>{{ article.getPublishedAt|date("j F Y à H:i") }}</span>
+                                            class="fa fa-calendar"></i>{{ article.getPublishedAt|date("d/m/Y H:i") }}</span>
                             </div>
                             {#
                             <div class="tags">
@@ -80,7 +82,7 @@
                             </div>
                             #}
                             <div class="description">
-                                {{ article.content|striptags|slice(0, 500)|raw }}
+                                {{ article.content|striptags|slice(0, 500)|raw }} ...
                             </div>
                             <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}"
                                class="btn read-more pull-left">Read More</a>

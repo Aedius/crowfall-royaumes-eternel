@@ -3,7 +3,9 @@
 namespace AppBundle\Controller\Front;
 
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Category;
 use AppBundle\Repository\ArticleRepository;
+use AppBundle\Repository\CategoryRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -81,7 +83,6 @@ class DefaultController extends Controller
         ]);
     }
 
-
     /**
      * @Route("/article/{id}/{slug}", name="article_show", requirements={"id": "\d+"})
      * @param $id
@@ -91,7 +92,7 @@ class DefaultController extends Controller
     public function articleAction($id, $slug)
     {
         /** @var ArticleRepository $repo */
-        $articleRepository = $this->getDoctrine()->getRepository('AppBundle:Article');
+        $articleRepository = $this->getDoctrine()->getRepository(Article::class);
 
         /** @var Article|null $article */
         $article = $articleRepository->find($id);
@@ -111,6 +112,45 @@ class DefaultController extends Controller
 
         return $this->render('show/article.html.twig', [
             'article' => $article,
+        ]);
+
+    }
+
+    /**
+     * @Route("/categorie/{id}/{slug}", name="category_show", requirements={"id": "\d+"})
+     * @param $id
+     * @param $slug
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function categoryAction($id, $slug)
+    {
+        /** @var CategoryRepository $repo */
+        $categoryRepository = $this->getDoctrine()->getRepository(Category::class);
+
+        /** @var Category|null $category */
+        $category = $categoryRepository->find($id);
+
+        if ($category->getSlug() != $slug) {
+            return $this->redirectToRoute(
+                $this->generateUrl(
+                    'category_show',
+                    ['slug' => $category->getSlug(),
+                        'id' => $category->getId()]
+                ));
+        }
+
+        $articleList = $this->getDoctrine()
+            ->getRepository('AppBundle:Article')
+            ->findBy(
+                array('published' => true, 'category' => $category),
+                array('publishedAt' => 'desc'),
+                8
+            );
+
+
+        return $this->render('show/category.html.twig', [
+            'category' => $category,
+            'articleList' => $articleList,
         ]);
 
     }
