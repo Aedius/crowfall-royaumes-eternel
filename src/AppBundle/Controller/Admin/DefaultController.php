@@ -6,10 +6,10 @@ use AppBundle\Entity\Category;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 /**
  * Class DefaultController
@@ -23,12 +23,12 @@ class DefaultController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function articleAction(Request $request)
+    public function categoryAction(Request $request)
     {
 
         $em = $this->get('doctrine.orm.default_entity_manager');
 
-        // create a article and give it some dummy data for this example
+        // create a category and give it some dummy data for this example
         $category = new Category();
 
         $fb = $this->createFormBuilder($category);
@@ -45,6 +45,16 @@ class DefaultController extends Controller
             'label' => 'description de la category',
         ]);
 
+        $fb->add('imageFile', VichImageType::class, [
+            'required' => true,
+            'allow_delete' => true,
+            'download_label' => function (Category $category) {
+                return $category->getSlug().'/image';
+            },
+            'download_uri' => true,
+            'image_uri' => true,
+        ]);
+
         $form = $fb->getForm();
 
         $form->handleRequest($request);
@@ -58,7 +68,7 @@ class DefaultController extends Controller
             } catch (UniqueConstraintViolationException $e) {
                 $this->addFlash('warning','not unique name or slug');
             }catch (\Exception $e) {
-                $this->addFlash('danger', 'something get wrong');
+                $this->addFlash('danger', 'something get wrong : '. $e->getMessage());
             }
         }
 

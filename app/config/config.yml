@@ -88,3 +88,6 @@ vich_uploader:
         article_image:
             uri_prefix:         /upload/article/image
             upload_destination: '%kernel.root_dir%/../web/upload/article/image'
+        category_image:
+            uri_prefix:         /upload/category/image
+            upload_destination: '%kernel.root_dir%/../web/upload/category/image'

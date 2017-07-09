@@ -26,4 +26,11 @@ class User extends BaseUser
     }
 
 
+    /**
+     * @var Article[]
+     *
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="author")
+     */
+    private $articleList;
+
 }

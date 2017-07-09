@@ -6,7 +6,7 @@
 
         <!-- Banner -->
         <div class="youplay-banner banner-top youplay-banner-parallax small">
-            <div class="image" style="background-image: url('assets/images/banner-blog-bg.jpg')">
+            <div class="image" style="background-image: url({{ vich_uploader_asset(category, 'imageFile') }})">
             </div>
 
             <div class="info">
@@ -14,7 +14,7 @@
                     <div class="container">
                         <h1>{{ category.name }}</h1>
                         <p>
-                            {{ category.description }}
+                            {{ category.description|raw }}
 
                         </p>
                     </div>
