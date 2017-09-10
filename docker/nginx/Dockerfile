@@ -1,7 +1,8 @@
-FROM debian:jessie
+FROM debian:stretch
 
 RUN apt-get update && apt-get install -y \
-    nginx
+    nginx \
+    certbot
 
 ADD nginx.conf /etc/nginx/
 ADD royaumes-eternels.conf /etc/nginx/sites-available/
@@ -10,6 +11,8 @@ RUN ln -s /etc/nginx/sites-available/royaumes-eternels.conf /etc/nginx/sites-ena
 RUN rm /etc/nginx/sites-enabled/default
 
 RUN echo "upstream php-upstream { server php:9000; }" > /etc/nginx/conf.d/upstream.conf
+
+RUN certbot certonly --webroot -w /var/www/symfony/web -d royaumes-eternels.net
 
 RUN usermod -u 1000 www-data
 
