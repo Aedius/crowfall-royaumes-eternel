@@ -7,6 +7,8 @@ base on https://github.com/maxpou/docker-symfony
 
 ##### for https : 
 
+( you should need to comment the 3 rows with /etc/letsencrypt/live/ to set up nginx)
+
 > docker run -it --rm -v certs:/etc/letsencrypt -v certs-data:/data/letsencrypt deliverous/certbot certonly --webroot --webroot-path=/data/letsencrypt -d royaumes-eternels.net
 
 ###### cronjob
