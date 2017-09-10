@@ -47,3 +47,7 @@ _ressources
 # uploaded file
 /web/upload/
 !/web/upload/.gitkeep
+
+# docker
+/docker/.env
+/docker/nginx-preprod/.htpasswd
