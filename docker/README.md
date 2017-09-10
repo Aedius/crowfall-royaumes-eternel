@@ -7,4 +7,8 @@ base on https://github.com/maxpou/docker-symfony
 
 ##### for https : 
 
-> docker-compose -f [...] exec nginx certbot certonly --webroot -w /var/www/symfony/web -d royaumes-eternels.net
+> docker run -it --rm -v certs:/etc/letsencrypt -v certs-data:/data/letsencrypt deliverous/certbot certonly --webroot --webroot-path=/data/letsencrypt -d royaumes-eternels.net
+
+###### cronjob
+
+> 0 0 */15 * * docker run -t --rm -v certs:/etc/letsencrypt -v certs-data:/data/letsencrypt -v /var/log/letsencrypt:/var/log/letsencrypt deliverous/certbot renew --webroot --webroot-path=/data/letsencrypt && docker kill -s HUP nginx >/dev/null 2>&1

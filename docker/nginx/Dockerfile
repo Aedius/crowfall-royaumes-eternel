@@ -1,8 +1,7 @@
 FROM debian:stretch
 
 RUN apt-get update && apt-get install -y \
-    nginx \
-    certbot
+    nginx 
 
 ADD nginx.conf /etc/nginx/
 ADD royaumes-eternels.conf /etc/nginx/sites-available/
