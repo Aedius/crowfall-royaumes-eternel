@@ -1,9 +1,19 @@
 base on https://github.com/maxpou/docker-symfony
 
+###alias : 
 
+######preprod :
 
-> docker-compose -f [...] exec php composer install
-> docker-compose -f [...] exec php php bin/console doctrine:migrations:migrate
+>alias dc='docker-compose -f docker-compose-preprod.yml -f docker-compose.yml '
+
+######prod :
+
+>alias dc='docker-compose -f docker-compose-prod.yml -f docker-compose.yml '
+
+### command example :
+
+> dc exec php composer install
+> dc exec php php bin/console doctrine:migrations:migrate
 
 ##### for https : 
 

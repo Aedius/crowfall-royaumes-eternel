@@ -13,8 +13,6 @@
                 <div class="container align-center">
                     <div class="youplay-form">
 
-
-
                         <h1>Login</h1>
 
                         <form action="{{ path("fos_user_security_check") }}" method="post">
@@ -42,8 +40,8 @@
 
                     </div>
                     <div class="btn-group social-list dib">
-                        <a class="btn btn-default" href="register" title="Inscription">Inscription</a>
-                        <a class="btn btn-default" href="#TODO" title="Password Oublié">Password oublié</a>
+                        <a class="btn btn-default" href="{{ path('fos_user_registration_register') }}" title="Inscription">Inscription</a>
+                        <a class="btn btn-default" href="{{ path('fos_user_resetting_request') }}" title="Password Oublié">Password oublié</a>
                     </div>
                 </div>
             </div>

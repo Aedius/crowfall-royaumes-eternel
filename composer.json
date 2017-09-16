@@ -25,11 +25,15 @@
         "twig/twig": "^1.0||^2.0",
         "friendsofsymfony/user-bundle": "^2.0",
         "doctrine/doctrine-migrations-bundle": "^1.2",
-        "vich/uploader-bundle": "^1.6"
+        "vich/uploader-bundle": "^1.6",
+        "mailgun/mailgun-php": "^2.3",
+        "php-http/guzzle6-adapter": "^1.1",
+        "php-http/message": "^1.6"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "phpmailer/phpmailer": "^5.2"
     },
     "scripts": {
         "symfony-scripts": [

@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Admin
- * Date: 08/07/2017
- * Time: 16:00
- */
-
 namespace AppBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\CacheClearCommand as CacheClearCommandSymfony;

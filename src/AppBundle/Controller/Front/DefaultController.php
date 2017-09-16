@@ -17,7 +17,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-
         $archetypeList = [
             [
                 'name' => 'Champion',

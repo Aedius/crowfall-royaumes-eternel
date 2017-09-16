@@ -1,13 +1,32 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/service_container.html
-parameters:
-#    parameter_name: value
-
 services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-    category_service:
+    app.category_service:
         class: AppBundle\Service\CategoryService
         arguments: ["@doctrine.orm.entity_manager"]
+
+    app.email_service:
+        class: AppBundle\Component\Mail\MailGun
+        arguments:
+            0: "%mailgunKey%"
+            1: "mail.royaumes-eternels.net"
+            2: "Royaumes Éternels<no-reply@mail.royaumes-eternels.net>"
+            3: "@router"
+            4: "@templating"
+            5:
+                confirmation.template: %fos_user.registration.confirmation.template%
+                resetting_password.template: %fos_user.resetting.email.template%
+
+    app.email_service_fake:
+        class: AppBundle\Component\Mail\MailFake
+        arguments:
+            0: "mail.royaumes-eternels.net"
+            1: "Royaumes Éternels<no-reply@mail.royaumes-eternels.net>"
+            2: "@router"
+            3: "@templating"
+            4:
+                confirmation.template: %fos_user.registration.confirmation.template%
+                resetting_password.template: %fos_user.resetting.email.template%
+

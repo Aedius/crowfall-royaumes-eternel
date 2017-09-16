@@ -19,3 +19,7 @@ monolog:
             level: debug
         console:
             type:  console
+
+fos_user:
+    service:
+        mailer: app.email_service
