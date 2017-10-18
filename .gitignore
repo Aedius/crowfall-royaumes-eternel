@@ -14,10 +14,8 @@ _ressources
 
 # Parameters
 /app/config/parameters.yml
-/app/config/parameters.ini
 
 # Managed by Composer
-/app/bootstrap.php.cache
 /var/bootstrap.php.cache
 /bin/*
 !bin/console
@@ -25,29 +23,21 @@ _ressources
 /vendor/
 
 # Assets and user uploads
-/web/bundles/
-/web/uploads/
-
-# Assets managed by Bower
-/web/assets/vendor/
+/web/upload/
+!/web/upload/.gitkeep
+/web/css/
 
 # PHPUnit
 /app/phpunit.xml
 /phpunit.xml
 
-# Build data
-/build/
-
-# Composer PHAR
-/composer.phar
 
 # Backup entities generated with doctrine:generate:entities command
 */Entity/*~
 
-# uploaded file
-/web/upload/
-!/web/upload/.gitkeep
-
 # docker
 /docker/.env
 /docker/nginx-preprod/.htpasswd
+
+#compass
+/ressources/public/
