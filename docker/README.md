@@ -13,6 +13,7 @@ base on https://github.com/maxpou/docker-symfony
 ### command example :
 
 > dc exec php composer install
+> dc exec php php bin/console cache:clear --no-warmup
 > dc exec php php bin/console doctrine:migrations:migrate
 
 ##### for https : 

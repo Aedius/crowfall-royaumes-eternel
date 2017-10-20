@@ -12,3 +12,7 @@ writer:
 admin:
     resource: "@AppBundle/Controller/Admin"
     type:     annotation
+
+member:
+    resource: "@AppBundle/Controller/Member"
+    type:     annotation

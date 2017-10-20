@@ -19,7 +19,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -50,56 +50,22 @@
 <!-- Navbar -->
 <div class="header-container">
     <header class="wrapper clearfix">
-        <h1 class="title">Royaumes Eternels</h1>
+        <h1 class="title"><a href="/">Royaumes Eternels</a></h1>
         <nav>
             <ul>
                 <li><a href="#">Categories</a></li>
                 <li><a href="#">Outils</a></li>
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    <a href="{{ path('writer-article-edit') }}">nouvel article</a>
-                    {#
-                    <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        {{ app.user.username }} <span class="label">Sans guilde</span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <ul role="menu">
-                            {% if is_granted("ROLE_WRITER") %}
-                                <li>
-                                    <a href="{{ path('writer-article-edit') }}">nouvel article</a>
-                                </li>
+                    <li><a href="{{ path('member_home') }}">compte</a></li>
 
-                                <li class="divider"></li>
-                            {% endif %}
+                    <li>
+                        <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                    </li>
 
-
-                            </li>
-                            {% if is_granted("ROLE_ADMIN") %}
-                                <li class="dropdown dropdown-submenu pull-left">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                       role="button"
-                                       aria-expanded="false">Admin</a>
-                                    <div class="dropdown-menu">
-                                        <ul role="menu">
-                                            <li>
-                                                <a href="{{ path('admin-category-edit') }}">New Category</a>
-                                            </li>
-                                            <li>
-                                                <a href="admin/app/version/list">Version</a>
-                                            </li>
-                                            <li>
-                                                <a href="admin/app/article/list">Article</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            {% endif %}
-                            <li>
-                                <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
-                        </ul>
-                    </div>
-                    #}
                 {% else %}
-                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                    <li>
+                        <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                    </li>
                 {% endif %}
             </ul>
         </nav>
