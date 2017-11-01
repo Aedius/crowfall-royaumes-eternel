@@ -19,5 +19,5 @@ services:
         image: antonienko/compass-watch
         command: watch --poll /src/compass
         volumes:
-            - ../ressources/:/src
+            - ../app/Resources/style/:/src
             - ../web/:/src/public

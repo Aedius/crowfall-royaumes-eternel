@@ -1,0 +1,26 @@
+@import "compass";
+@import "partials/normalize";
+@import "partials/variables";
+
+.header-container{
+  width: 100%;
+  background-color: $background-medium;
+  border-bottom: solid $background-light $border-size;
+  border-top: solid $background-dark $border-size;
+
+  .title{
+    float:left
+  }
+
+  li{
+    text-decoration: none;
+  }
+}
+.footer-container{
+  width: 100%;
+  background-color: $background-medium;
+  border-bottom: solid $background-dark $border-size;
+  border-top: solid $background-light $border-size;
+  text-align: center;
+
+}

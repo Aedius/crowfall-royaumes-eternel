@@ -40,5 +40,5 @@ _ressources
 /docker/nginx-preprod/.htpasswd
 
 #compass
-/ressources/public/
-/ressources/.sass-cache/
+/app/Resources/style/public/
+/app/Resources/style/.sass-cache/
