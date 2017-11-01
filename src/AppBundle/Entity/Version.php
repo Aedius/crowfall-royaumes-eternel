@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,18 +45,23 @@ class Version
     private $description;
 
     /**
-     * @var Article[]
+     * @var Collection of Article
      *
      * @ORM\OneToMany(targetEntity="Article", mappedBy="version")
      */
     private $articleList;
+
+    public function __construct()
+    {
+        $this->articleList = new ArrayCollection();
+    }
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -64,7 +71,7 @@ class Version
      *
      * @return \DateTime
      */
-    public function getDate()
+    public function getDate(): ?\DateTime
     {
         return $this->date;
     }
@@ -76,7 +83,7 @@ class Version
      *
      * @return Version
      */
-    public function setDate($date)
+    public function setDate(\DateTime $date): Version
     {
         $this->date = $date;
 
@@ -88,7 +95,7 @@ class Version
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -100,7 +107,7 @@ class Version
      *
      * @return Version
      */
-    public function setDescription($description)
+    public function setDescription(string $description): Version
     {
         $this->description = $description;
 
@@ -108,27 +115,21 @@ class Version
     }
 
     /**
-     * @return Article[]
+     * @return Collection
      */
-    public function getArticleList()
+    public function getArticleList(): Collection
     {
         return $this->articleList;
     }
 
-    /**
-     * @param Article[] $articleList
-     */
-    public function setArticleList($articleList)
-    {
-        $this->articleList = $articleList;
-    }
 
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getName() ?? '';
+        $name = $this->getName();
+        return is_string($name) ? $name : '';
     }
 
     /**
@@ -136,7 +137,7 @@ class Version
      *
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -148,7 +149,7 @@ class Version
      *
      * @return Version
      */
-    public function setName($name)
+    public function setName(string $name): Version
     {
         $this->name = $name;
 

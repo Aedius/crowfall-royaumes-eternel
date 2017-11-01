@@ -2,19 +2,25 @@ base on https://github.com/maxpou/docker-symfony
 
 ###alias : 
 
-######preprod :
+######for preprod :
 
 >alias dc='docker-compose -f docker-compose-preprod.yml -f docker-compose.yml '
 
-######prod :
+######for prod :
 
 >alias dc='docker-compose -f docker-compose-prod.yml -f docker-compose.yml '
 
-### command example :
+######symfony :
+
+>alias symfony='dc exec php php bin/console '
+
+
+### install commands :
 
 > dc exec php composer install
-> dc exec php php bin/console cache:clear --no-warmup
-> dc exec php php bin/console doctrine:migrations:migrate
+> symfony cache:clear --no-warmup
+> symfony doctrine:migrations:migrate
+> symfony assets:install --symlink
 
 ##### for https : 
 

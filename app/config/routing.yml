@@ -16,3 +16,8 @@ admin:
 member:
     resource: "@AppBundle/Controller/Member"
     type:     annotation
+
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/AdminController.php"
+    type:     annotation
+    prefix:   /administration
