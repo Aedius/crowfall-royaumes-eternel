@@ -13,12 +13,16 @@ base on https://github.com/maxpou/docker-symfony
 ######symfony :
 
 >alias symfony='dc exec php php bin/console '
+>alias symfonyAdmin='dc exec php php bin/consoleAdmin '
+>alias symfonyWriter='dc exec php php bin/consoleWriter '
 
 
-### install commands :
+### install / upgrade commands :
 
 > dc exec php composer install
 > symfony cache:clear --no-warmup
+> symfonyAdmin cache:clear --no-warmup
+> symfonyWriter cache:clear --no-warmup
 > symfony doctrine:migrations:migrate
 > symfony assets:install --symlink
 

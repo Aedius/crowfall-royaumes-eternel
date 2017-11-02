@@ -85,17 +85,3 @@ vich_uploader:
         category_image:
             uri_prefix:         /upload/category/image
             upload_destination: '%kernel.root_dir%/../web/upload/category/image'
-
-easy_admin:
-    site_name: 'Royaumes eternels'
-    design:
-        brand_color: '#8b0000'
-    entities:
-        Category:
-            class: AppBundle\Entity\Category
-        User:
-            class: AppBundle\Entity\User
-        Version:
-            class: AppBundle\Entity\Version
-        Article:
-            class: AppBundle\Entity\Article

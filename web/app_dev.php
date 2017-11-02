@@ -23,7 +23,20 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
 $loader = require __DIR__.'/../app/autoload.php';
 Debug::enable();
 
-$kernel = new AppKernel('dev', true);
+$requestUri = ltrim($_SERVER['REQUEST_URI'],'/');
+$requestInfo = explode('/',$requestUri);
+switch ($requestInfo[0]){
+    case 'writer':
+        $kernel = new WriterKernel('dev', true);
+        break;
+    case 'admin':
+        $kernel = new AdminKernel('dev', true);
+        break;
+
+    default:
+        $kernel = new AppKernel('dev', true);
+}
+
 $kernel->loadClassCache();
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);

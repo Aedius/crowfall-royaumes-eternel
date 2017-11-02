@@ -5,19 +5,15 @@ front:
     resource: "@AppBundle/Controller/Front"
     type:     annotation
 
-writer:
-    resource: "@AppBundle/Controller/Writer"
-    type:     annotation
-
-admin:
-    resource: "@AppBundle/Controller/Admin"
-    type:     annotation
+#writer:
+#    resource: "@AppBundle/Controller/Writer"
+#    type:     annotation
+#
+#admin:
+#    resource: "@AppBundle/Controller/Admin"
+#    type:     annotation
 
 member:
     resource: "@AppBundle/Controller/Member"
     type:     annotation
 
-easy_admin_bundle:
-    resource: "@EasyAdminBundle/Controller/AdminController.php"
-    type:     annotation
-    prefix:   /administration
