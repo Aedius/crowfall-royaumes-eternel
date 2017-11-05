@@ -41,65 +41,64 @@
 
 
 <body>
-<!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
 
+<div id="global-container">
 
-<!-- Navbar -->
-<div class="header-container">
-    <header class="wrapper clearfix">
+    <!-- Navbar -->
+    <div id="menu-container">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Outils</a></li>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <li><a href="{{ path('member_home') }}">compte</a></li>
+
+                        <li>
+                            <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                        </li>
+
+                    {% else %}
+                        <li>
+                            <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <!-- /Navbar -->
+
+    <div id="header-container">
         <h1 class="title"><a href="/">Royaumes Eternels</a></h1>
-        <nav>
-            <ul>
-                <li><a href="#">Categories</a></li>
-                <li><a href="#">Outils</a></li>
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    <li><a href="{{ path('member_home') }}">compte</a></li>
+    </div>
 
-                    <li>
-                        <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
-                    </li>
+    <!-- Main Content -->
+    <div id="main-container">
+        {% block body %}{% endblock %}
+    </div>
+    <!-- /Main Content -->
 
-                {% else %}
-                    <li>
-                        <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
+
+    <!-- Footer -->
+    <div id="footer-container">
+        <footer class="wrapper">
+            <h3>Rejoints la communauté <strong>Crowfall Francophone</strong>
+                <a href="https://discord.gg/AJrPY9v" target="_blank">
+                    <i class="fa fa-external-link-square"></i>
+                    <span>sur Discord</span>
+                </a>
+                ou
+                <a href="https://github.com/Aedius/crowfall-royaumes-eternel" target="_blank">
+                    <i class="fa fa-github-square"></i>
+                    <span>sur Github</span>
+                </a>
+            </h3>
+        </footer>
+    </div>
+
+    <!-- /Footer -->
 </div>
-<!-- /Navbar -->
-
-
-<!-- Main Content -->
-<div class="main-container">
-    {% block body %}{% endblock %}
-</div>
-<!-- /Main Content -->
-
-
-<!-- Footer -->
-<div class="footer-container">
-    <footer class="wrapper">
-        <h3>Rejoints la communauté <strong>Crowfall Francophone</strong>
-            <a href="https://discord.gg/AJrPY9v" target="_blank">
-                <i class="fa fa-external-link-square"></i>
-                <span>sur Discord</span>
-            </a>
-            ou
-            <a href="https://github.com/Aedius/crowfall-royaumes-eternel" target="_blank">
-                <i class="fa fa-github-square"></i>
-                <span>sur Github</span>
-            </a>
-        </h3>
-    </footer>
-</div>
-
-<!-- /Footer -->
-
 
 {% block javascripts %}{% endblock %}
 
