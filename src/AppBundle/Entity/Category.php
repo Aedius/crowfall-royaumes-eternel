@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -50,9 +51,9 @@ class Category
     private $description;
 
     /**
-     * @var Article[]
+     * @var \Doctrine\Common\Collections\Collection|Article[]
      *
-     * @ORM\OneToMany(targetEntity="Article", mappedBy="category")
+     * @ORM\ManyToMany(targetEntity="Article", mappedBy="categoryList")
      */
     private $articleList;
 
@@ -79,13 +80,17 @@ class Category
      */
     private $updatedAt;
 
+    public function __construct()
+    {
+        $this->articleList = new ArrayCollection();
+    }
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -95,7 +100,7 @@ class Category
      *
      * @return string
      */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
@@ -107,27 +112,11 @@ class Category
      *
      * @return Category
      */
-    public function setSlug($slug)
+    public function setSlug(string $slug): Category
     {
         $this->slug = $slug;
 
         return $this;
-    }
-
-    /**
-     * @return Article[]
-     */
-    public function getArticleList()
-    {
-        return $this->articleList;
-    }
-
-    /**
-     * @param Article[] $articleList
-     */
-    public function setArticleList($articleList)
-    {
-        $this->articleList = $articleList;
     }
 
     /**
@@ -178,6 +167,13 @@ class Category
         $this->description = $description;
     }
 
+    /**
+     * @return File|null
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
 
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
@@ -204,11 +200,11 @@ class Category
     }
 
     /**
-     * @return File|null
+     * @return string|null
      */
-    public function getImageFile()
+    public function getImage()
     {
-        return $this->imageFile;
+        return $this->image;
     }
 
     /**
@@ -224,11 +220,63 @@ class Category
     }
 
     /**
-     * @return string|null
+     * @return \DateTime
      */
-    public function getImage()
+    public function getUpdatedAt(): \DateTime
     {
-        return $this->image;
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     * @return Category
+     */
+    public function setUpdatedAt(\DateTime $updatedAt): Category
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    /**
+     * @param Article $article
+     */
+    public function addArticle(Article $article)
+    {
+        if ($this->articleList->contains($article)) {
+            return;
+        }
+        $this->articleList->add($article);
+        $article->addCategory($this);
+    }
+
+    /**
+     * @param Article $article
+     */
+    public function removeArticle(Article $article)
+    {
+        if (!$this->articleList->contains($article)) {
+            return;
+        }
+        $this->articleList->removeElement($article);
+        $article->removeCategory($this);
+    }
+
+    /**
+     * @return Article[]|\Doctrine\Common\Collections\Collection
+     */
+    public function getArticleList()
+    {
+        return $this->articleList;
+    }
+
+    /**
+     * @param Article[]|\Doctrine\Common\Collections\Collection $articleList
+     * @return Category
+     */
+    public function setArticleList($articleList)
+    {
+        $this->articleList = $articleList;
+        return $this;
     }
 
 }

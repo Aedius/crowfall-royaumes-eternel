@@ -15,3 +15,9 @@ services:
         image: phpmyadmin/phpmyadmin
     mailcatcher:
         image: yappabe/mailcatcher
+    compass:
+        image: antonienko/compass-watch
+        command: watch --poll /src/compass
+        volumes:
+            - ../app/Resources/style/:/src
+            - ../web/:/src/public

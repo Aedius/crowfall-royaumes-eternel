@@ -1,0 +1,16 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Aedius -- creator -- https://twitter.com/Aedius
+
+# THANKS
+
+    Everyone from the discord <3
+
+# TECHNOLOGY COLOPHON
+
+    PHP, Symfony
+    CSS3, compass
+    HTML5

@@ -6,7 +6,20 @@ use Symfony\Component\HttpFoundation\Request;
 $loader = require __DIR__.'/../app/autoload.php';
 include_once __DIR__.'/../var/bootstrap.php.cache';
 
-$kernel = new AppKernel('prod', false);
+
+$requestUri = ltrim($_SERVER['REQUEST_URI'],'/');
+$requestInfo = explode('/',$requestUri);
+switch ($requestInfo[0]){
+    case 'writer':
+        $kernel = new WriterKernel('prod', false);
+        break;
+    case 'admin':
+        $kernel = new AdminKernel('prod', false);
+        break;
+
+    default:
+        $kernel = new AppKernel('prod', false);
+}
 $kernel->loadClassCache();
 //$kernel = new AppCache($kernel);
 

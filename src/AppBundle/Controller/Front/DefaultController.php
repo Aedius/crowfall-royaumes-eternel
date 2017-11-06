@@ -17,55 +17,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $archetypeList = [
-            [
-                'name' => 'Champion',
-                'img' => '/assets/images/champion-500px.png',
-                'url' => '#',
-            ],
-            [
-                'name' => 'Confessor',
-                'img' => '/assets/images/confessor-500px.png',
-                'url' => '#',
-            ],
-            [
-                'name' => 'Druid',
-                'img' => '/assets/images/druid-500px.png',
-                'url' => '#',
-            ],
-            [
-                'name' => 'Duelist',
-                'img' => '/assets/images/duelist-500px.png',
-                'url' => '#',
-            ],
-            [
-                'name' => 'Knight',
-                'img' => '/assets/images/knight-500px.png',
-                'url' => '#',
-            ],
-            [
-                'name' => 'Legionnaire',
-                'img' => '/assets/images/legionnaire-500px.png',
-                'url' => '#',
-            ],
-            [
-                'name' => 'Myrmidon',
-                'img' => '/assets/images/myrmidon-500px.png',
-                'url' => '#',
-            ],
-            [
-                'name' => 'Ranger',
-                'img' => '/assets/images/ranger-500px.png',
-                'url' => '#',
-            ],
-            [
-                'name' => 'Templar',
-                'img' => '/assets/images/templar-500px.png',
-                'url' => '#',
-            ],
-        ];
-
-        shuffle($archetypeList);
 
         $articleList = $this->getDoctrine()
             ->getRepository('AppBundle:Article')
@@ -75,9 +26,7 @@ class DefaultController extends Controller
                 5
             );
 
-
         return $this->render('index.html.twig', [
-            'archetypeList' => $archetypeList,
             'articleList' => $articleList,
         ]);
     }

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -17,6 +18,21 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class Article
 {
     /**
+     * @var \Doctrine\Common\Collections\Collection|Category[]
+     *
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="articleList")
+     * @ORM\JoinTable(
+     *  name="article_category",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="article_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     *  }
+     * )
+     */
+    protected $categoryList;
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -24,7 +40,6 @@ class Article
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var string
      *
@@ -32,7 +47,6 @@ class Article
      * @Assert\NotBlank()
      */
     private $titre;
-
     /**
      * @var string
      *
@@ -40,14 +54,12 @@ class Article
      * @Assert\NotBlank()
      */
     private $slug;
-
     /**
      * @var string
      *
      * @ORM\Column(name="content", type="text")
      */
     private $content;
-
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
@@ -56,28 +68,24 @@ class Article
      * @var File
      */
     private $imageFile;
-
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @var string
      */
     private $image;
-
     /**
      * @ORM\Column(type="datetime")
      *
      * @var \DateTime
      */
     private $updatedAt;
-
     /**
      * @var bool
      *
      * @ORM\Column(name="published", type="boolean")
      */
     private $published = false;
-
     /**
      * @var \DateTime
      *
@@ -85,15 +93,6 @@ class Article
      * @Assert\Type("\DateTime")
      */
     private $publishedAt;
-
-    /**
-     * @var Category
-     *
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="articleList")
-     * @Assert\NotBlank()
-     */
-    private $category;
-
     /**
      * @var Version
      *
@@ -116,10 +115,16 @@ class Article
      */
     private $home = true;
 
+
+    public function __construct()
+    {
+        $this->categoryList = new ArrayCollection();
+    }
+
     /**
      * @return bool
      */
-    public function isHome()
+    public function isHome(): bool
     {
         return $this->home;
     }
@@ -127,7 +132,7 @@ class Article
     /**
      * @param bool $home
      */
-    public function setHome($home)
+    public function setHome(bool $home): void
     {
         $this->home = $home;
     }
@@ -135,17 +140,33 @@ class Article
     /**
      * @return Version
      */
-    public function getVersion()
+    public function getVersion(): ?version
     {
         return $this->version;
     }
 
     /**
      * @param Version $version
+     *
+     * @throws \InvalidArgumentException
      */
-    public function setVersion($version)
+    public function setVersion($version): void
     {
-        $this->version = $version;
+        if ($version === null) {
+            if ($this->version !== null) {
+                $this->version->getArticleList()->removeElement($this);
+            }
+            $this->version = null;
+        } else {
+            if (!$version instanceof Version) {
+                throw new \InvalidArgumentException('$version must be null or instance of Version');
+            }
+            if ($this->version !== null) {
+                $this->version->getArticleList()->removeElement($this);
+            }
+            $this->version = $version;
+            $version->getArticleList()->add($this);
+        }
     }
 
 
@@ -154,7 +175,7 @@ class Article
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -164,7 +185,7 @@ class Article
      *
      * @return string
      */
-    public function getSlug()
+    public function getSlug():?string
     {
         return $this->slug;
     }
@@ -176,7 +197,7 @@ class Article
      *
      * @return Article
      */
-    public function setSlug($slug)
+    public function setSlug(string $slug): Article
     {
         $this->slug = $slug;
 
@@ -188,7 +209,7 @@ class Article
      *
      * @return string
      */
-    public function getContent()
+    public function getContent():?string
     {
         return $this->content;
     }
@@ -200,11 +221,19 @@ class Article
      *
      * @return Article
      */
-    public function setContent($content)
+    public function setContent($content): Article
     {
         $this->content = $content;
 
         return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
     }
 
     /**
@@ -218,7 +247,7 @@ class Article
      *
      * @return Article
      */
-    public function setImageFile(File $image = null)
+    public function setImageFile(File $image = null): Article
     {
         $this->imageFile = $image;
 
@@ -232,11 +261,11 @@ class Article
     }
 
     /**
-     * @return File|null
+     * @return string|null
      */
-    public function getImageFile()
+    public function getImage(): ?string
     {
-        return $this->imageFile;
+        return $this->image;
     }
 
     /**
@@ -244,7 +273,7 @@ class Article
      *
      * @return Article
      */
-    public function setImage($image)
+    public function setImage($image): Article
     {
         $this->image = $image;
 
@@ -252,19 +281,11 @@ class Article
     }
 
     /**
-     * @return string|null
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * Get published
      *
      * @return bool
      */
-    public function getPublished()
+    public function getPublished(): bool
     {
         return $this->published;
     }
@@ -276,7 +297,7 @@ class Article
      *
      * @return Article
      */
-    public function setPublished($published)
+    public function setPublished($published): Article
     {
         $this->published = $published;
 
@@ -288,7 +309,7 @@ class Article
      *
      * @return \DateTime
      */
-    public function getPublishedAt()
+    public function getPublishedAt(): ?\DateTime
     {
         return $this->publishedAt;
     }
@@ -300,35 +321,21 @@ class Article
      *
      * @return Article
      */
-    public function setPublishedAt($publishedAt)
+    public function setPublishedAt($publishedAt): Article
     {
         $this->publishedAt = $publishedAt;
 
         return $this;
     }
 
-    /**
-     * @return Category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param Category $category
-     */
-    public function setCategory(Category $category)
-    {
-        $this->category = $category;
-    }
 
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getTitre() ?? '';
+        $titre = $this->getTitre();
+        return is_string($titre) ? $titre : '';
     }
 
     /**
@@ -336,7 +343,7 @@ class Article
      *
      * @return string
      */
-    public function getTitre()
+    public function getTitre(): ?string
     {
         return $this->titre;
     }
@@ -348,7 +355,7 @@ class Article
      *
      * @return Article
      */
-    public function setTitre($titre)
+    public function setTitre(string $titre): Article
     {
         $this->titre = $titre;
 
@@ -358,17 +365,94 @@ class Article
     /**
      * @return User
      */
-    public function getAuthor(): User
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
     /**
      * @param User $author
+     *
+     * @throws \InvalidArgumentException
      */
-    public function setAuthor(User $author)
+    public function setAuthor($author): void
     {
-        $this->author = $author;
+        if ($author === null) {
+            if ($this->author !== null) {
+                $this->author->getArticleList()->removeElement($this);
+            }
+            $this->author = null;
+        } else {
+            if (!$author instanceof User) {
+                throw new \InvalidArgumentException('$author must be null or instance of User');
+            }
+            if ($this->author !== null) {
+                $this->author->getArticleList()->removeElement($this);
+            }
+            $this->author = $author;
+            $author->getArticleList()->add($this);
+        }
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt(): \DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     *
+     * @return Article
+     */
+    public function setUpdatedAt(\DateTime $updatedAt): Article
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    /**
+     * @param Category $category
+     */
+    public function addCategory(Category $category): void
+    {
+        if ($this->categoryList->contains($category)) {
+            return;
+        }
+        $this->categoryList->add($category);
+        $category->addArticle($this);
+    }
+
+    /**
+     * @param Category $category
+     */
+    public function removeCategory(Category $category): void
+    {
+        if (!$this->categoryList->contains($category)) {
+            return;
+        }
+        $this->categoryList->removeElement($category);
+        $category->removeArticle($this);
+    }
+
+    /**
+     * @return Category[]|\Doctrine\Common\Collections\Collection
+     */
+    public function getCategoryList()
+    {
+        return $this->categoryList;
+    }
+
+    /**
+     * @param Category[]|\Doctrine\Common\Collections\Collection $categoryList
+     * @return Article
+     */
+    public function setCategoryList($categoryList)
+    {
+        $this->categoryList = $categoryList;
+        return $this;
     }
 
 }

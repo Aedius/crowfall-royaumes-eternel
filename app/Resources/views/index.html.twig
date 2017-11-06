@@ -1,100 +1,48 @@
-{% extends 'base.html.twig' %}
+{% extends 'global/base.html.twig' %}
 
 {% block body %}
 
-    <section class="content-wrap">
-        <!-- Banner -->
-        <section class="youplay-banner banner-top youplay-banner-parallax">
-            <div class="image" style="background-image: url('/assets/images/banner-bg.jpg')">
-            </div>
 
-            <div class="info">
-                <div>
-                    <div class="container">
-                        <h1>Communauté Francophone pour Crowfall</h1>
-                        <em>Crowfall est un MMORPG orienté PvP <br/>
-                            Il sortira a priori fin 2017.</em>
-                        <br>
-                        <br>
-                        <br>
-                        <a class="btn btn-lg" href="https://crowfall.com/">Join Crowfall</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- /Banner -->
+    <div class="main wrapper clearfix">
 
-        <!-- Images With Text -->
-        <div class="youplay-carousel" data-autoplay="2000">
-            {% for archetype in archetypeList %}
-                <a class="angled-img" href="{{ archetype.url }}">
-                    <div class="img">
-                        <img src="{{ archetype.img }}" alt="{{ archetype.name }}">
-                    </div>
-                    <div class="over-info">
-                        <div>
-                            <div><br/><br/><br/><br/><br/><br/>
-                                <h4>{{ archetype.name }}</h4>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            {% endfor %}
 
-        </div>
-        <!-- /Images With Text -->
-
-        <!-- Latest News -->
-        <h2 class="container h1">Latest News</h2>
-        <section class="youplay-news container">
+        <article>
 
             {% for article in articleList %}
-                <!-- Single News Block -->
-                <div class="news-one">
-                    <div class="row vertical-gutter">
-                        <div class="col-md-4">
-                            <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}"
-                               class="angled-img">
-                                <div class="img">
-                                    <img src="{{ vich_uploader_asset(article, 'imageFile') }}"
-                                         width="500px" height="375px"
-                                         alt="image for : {{ article.titre }}"/>
-                                </div>
-                                {#
-                                <div class="youplay-hexagon-rating youplay-hexagon-rating-small" data-max="10"
-                                     data-back-color="rgba(60,7,50,0.1)" data-front-color="#3C0732" data-size="50"
-                                     title="6.8 out of 10"><span>6.8</span>
-                                </div>
-                                #}
-                            </a>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="clearfix">
-                                <h3 class="h2 pull-left m-0"><a
-                                            href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}">{{ article.titre }}</a>
-                                </h3>
-                                <span class="date pull-right"><i
-                                            class="fa fa-calendar"></i>{{ article.getPublishedAt|date("d/m/Y H:i") }}</span>
-                            </div>
-                            {#
-                            <div class="tags">
-                                <i class="fa fa-tags"></i> <a href="#">Road Not Taken</a>, <a href="#">first try</a>, <a
-                                        href="#">newbie game</a>
-                            </div>
-                            #}
-                            <div class="description">
-                                {{ article.content|striptags|slice(0, 500)|raw }} ...
-                            </div>
-                            <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}"
-                               class="btn read-more pull-left">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- /Single News Block -->
+                {% if loop.first %}
+                    <header>
+                    <h1>
+                        <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}"></a>{{ article.titre }}
+                    </h1>
+                {% else %}
+                    <section>
+                    <h3>
+                        <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}"></a>{{ article.titre }}
+                    </h3>
+                {% endif %}
+                <img src="{{ vich_uploader_asset(article, 'imageFile') }}"
+                     width="500px" height="375px"
+                     alt="image for : {{ article.titre }}"/>
+                <p>
+                    {{ article.getPublishedAt|date("d/m/Y H:i") }}
+                </p>
+                <p> {{ article.content|striptags|slice(0, 500)|raw }} ...
+                </p>
+                <p>
+                <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}"
+                   class="btn read-more pull-left">Read More</a></p>
+
+
+                {% if loop.first %}
+                    </header>
+                {% else %}
+                    </section>
+                {% endif %}
             {% endfor %}
 
-        </section>
-        <!-- /Latest News -->
-    </section>
+        </article>
+
+    </div> <!-- #main -->
+
 
 {% endblock %}

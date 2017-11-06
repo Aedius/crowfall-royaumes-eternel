@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>{% block title %}Royaumes Eternels{% endblock %}</title>
+
+    <meta name="description" content="Communauté Francophone pour Crowfall">
+
+
+    {# START favicon #}
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    {# END favicon #}
+
+
+    {% block stylesheets %}
+
+        <link rel="stylesheet" type="text/css" href="/css/base.css?{{ date().timestamp }}"/>
+
+    {% endblock %}
+
+
+</head>
+
+
+<body>
+
+<div id="global-container">
+
+    <!-- Navbar -->
+    <div id="menu-container">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Outils</a></li>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <li><a href="{{ path('member_home') }}">compte</a></li>
+
+                        <li>
+                            <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                        </li>
+
+                    {% else %}
+                        <li>
+                            <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <!-- /Navbar -->
+
+    <div id="header-container">
+        <h1 class="title"><a href="/">Royaumes Eternels</a></h1>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-container">
+        {% block body %}{% endblock %}
+    </div>
+    <!-- /Main Content -->
+
+
+    <!-- Footer -->
+    <div id="footer-container">
+        <footer class="wrapper">
+            <h3>Rejoints la communauté <strong>Crowfall Francophone</strong>
+                <a href="https://discord.gg/AJrPY9v" target="_blank">
+                    <i class="fa fa-external-link-square"></i>
+                    <span>sur Discord</span>
+                </a>
+                ou
+                <a href="https://github.com/Aedius/crowfall-royaumes-eternel" target="_blank">
+                    <i class="fa fa-github-square"></i>
+                    <span>sur Github</span>
+                </a>
+            </h3>
+        </footer>
+    </div>
+
+    <!-- /Footer -->
+</div>
+
+{% block javascripts %}{% endblock %}
+
+</body>
+
+</html>

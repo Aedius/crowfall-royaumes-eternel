@@ -5,10 +5,15 @@ front:
     resource: "@AppBundle/Controller/Front"
     type:     annotation
 
-writer:
-    resource: "@AppBundle/Controller/Writer"
+#writer:
+#    resource: "@AppBundle/Controller/Writer"
+#    type:     annotation
+#
+#admin:
+#    resource: "@AppBundle/Controller/Admin"
+#    type:     annotation
+
+member:
+    resource: "@AppBundle/Controller/Member"
     type:     annotation
 
-admin:
-    resource: "@AppBundle/Controller/Admin"
-    type:     annotation

@@ -5,7 +5,7 @@
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
         "psr-4": { "": "src/" },
-        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
+        "classmap": [ "app/AdminKernel.php", "app/AppKernel.php", "app/WriterKernel.php", "app/AppCache.php" ]
     },
     "autoload-dev": {
         "psr-4": { "Tests\\": "tests/" }
@@ -28,7 +28,8 @@
         "vich/uploader-bundle": "^1.6",
         "mailgun/mailgun-php": "^2.3",
         "php-http/guzzle6-adapter": "^1.1",
-        "php-http/message": "^1.6"
+        "php-http/message": "^1.6",
+        "javiereguiluz/easyadmin-bundle": "^1.17"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
