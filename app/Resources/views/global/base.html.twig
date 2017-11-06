@@ -49,8 +49,7 @@
         <header>
             <nav>
                 <ul>
-                    <li><a href="#">Categories</a></li>
-                    <li><a href="#">Outils</a></li>
+                    {# inverse order because of float : right #}
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <li><a href="{{ path('member_home') }}">compte</a></li>
 
@@ -63,6 +62,8 @@
                             <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
                         </li>
                     {% endif %}
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Outils</a></li>
                 </ul>
             </nav>
         </header>
@@ -70,20 +71,19 @@
     <!-- /Navbar -->
 
     <div id="header-container">
+        <input type="text" placeholder="Entrez votre recherche..."/>
         <h1 class="title"><a href="/">Royaumes Eternels</a></h1>
     </div>
 
     <!-- Main Content -->
-    <div id="main-container">
-        {% block body %}{% endblock %}
-    </div>
+    {% block body %}{% endblock %}
     <!-- /Main Content -->
 
 
     <!-- Footer -->
     <div id="footer-container">
         <footer class="wrapper">
-            <h3>Rejoints la communauté <strong>Crowfall Francophone</strong>
+            <p>Rejoints la communauté <strong>Crowfall Francophone</strong>
                 <a href="https://discord.gg/AJrPY9v" target="_blank">
                     <i class="fa fa-external-link-square"></i>
                     <span>sur Discord</span>
@@ -93,7 +93,7 @@
                     <i class="fa fa-github-square"></i>
                     <span>sur Github</span>
                 </a>
-            </h3>
+            </p>
         </footer>
     </div>
 

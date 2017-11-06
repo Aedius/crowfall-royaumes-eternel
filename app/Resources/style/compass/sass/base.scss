@@ -1,7 +1,9 @@
 @import "compass";
 @import "partials/normalize";
 @import "partials/variables";
+@import "partials/mixin";
 @import "compass/css3/opacity";
+@import "compass/css3/box-shadow";
 
 body {
   background-image: url('/images/layout/fond.jpg');
@@ -18,28 +20,87 @@ body {
 
 #menu-container {
   width: 100%;
-  height: 30px;
-  background-color: $color-bg-content;
-  @include opacity($opacity-bg);
-  ul {
-    text-decoration: none;
-    li a{
-      float: right;
-      color: $color-txt-important;
+  height: 55px;
+  @include content-block();
+  header {
+
+    @include global-center();
+    @include vertical-center(55px);
+
+    ul {
+      list-style-type: none;
+      li a {
+        text-decoration: none;
+        float: right;
+        color: $color-txt-important;
+        margin-left: 40px;
+        text-transform: uppercase;
+        font-weight: 300;
+
+        &:hover {
+          color: yellow;
+        }
+
+      }
     }
   }
 }
 
-#header-container{
-  clear: both;
+#header-container {
+
+  @include global-center();
+  input {
+    float: right;
+    width: 350px;
+    padding: 5px 5px 5px 10px;
+    height: 25px;
+    background-image: url('/images/layout/loupe.png');
+    background-repeat: no-repeat;
+    background-position: 330px 10px;
+    font-style: italic;
+    font-size: 0.8em;
+  }
+
+  a {
+    color: $color-txt-important;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    &:hover {
+      color: yellow;
+    }
+  }
+}
+
+#slide {
+  @include global-center();
+  .slide-container {
+    padding: 5px;
+    background-color: rgba(white, 0.1);
+    @include box-shadow(rgba(black, 0.2) 0 0 10px 5px);
+    width: 1190px;
+    height: 440px;
+  }
+}
+
+#news {
+  @include global-center();
+  @include content-block();
+  text-align: center;
+  color: white;
+  padding: 10px 0;
+  .news-title {
+    font-weight: 300;
+  }
 }
 
 #main-container {
-  margin-left: auto;
-  margin-right: auto;
-  width: 1100px;
-  background-color: $color-bg-content;
-  padding: 10px;
+
+  @include global-center();
+  @include content-block();
+
+  padding: 10px 0;
+
   @include opacity($opacity-bg);
 }
 
@@ -48,4 +109,13 @@ body {
   background-color: $color-bg-content;
   text-align: center;
   @include opacity($opacity-bg);
+}
+
+.spacer{
+  @include global-center();
+  background-color: white;
+  @include opacity(0.5);
+  height:5px;
+  margin-bottom: 10px;
+
 }

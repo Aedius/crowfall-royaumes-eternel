@@ -137,6 +137,10 @@ h1 {
   margin: 0.67em 0;
 }
 
+h2, h3, h4, h5 {
+  margin: 0;
+}
+
 /**
  * Address styling not present in IE 8/9.
  */
@@ -426,7 +430,6 @@ th {
   padding: 0;
 }
 
-
 /* Listes
    ========================================================================== */
 
@@ -438,3 +441,4 @@ ul {
   margin: 0;
   padding: 0;
 }
+
