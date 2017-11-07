@@ -16,46 +16,54 @@
     <div class="spacer"></div>
 
     <div id="main-container">
-        <div class="main wrapper clearfix">
+
+        <article>
+
+            {% for article in articleList %}
+                <section>
+
+                    <div class="img-container">
+                        <img src="{{ vich_uploader_asset(article, 'imageFile') }}"
+                             width="240px" height="130px"
+                             alt="image for : {{ article.titre }}"/>
+                    </div>
+                    <div class="info-container">
+                        {% for category in article.categoryList %}
+                            <button class="btn-category">{{ category.name }}</button>
+                        {% endfor %}
+
+                        {% if loop.first %}
+                            <h2>
+                                <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}">{{ article.titre }}</a>
+                            </h2>
+                        {% else %}
+                            <h3>
+                                <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}">{{ article.titre }}</a>
+                            </h3>
+                        {% endif %}
+                        <p>
+                            Par <a href="#">{{ article.author.username }}</a>,
+                            le {{ article.getPublishedAt|date("d/m/Y à H:i") }} |
+                            <a href="#">🗩 0 commentaire</a>
+
+                        </p>
+                        <p> {{ article.content|striptags|slice(0, 300)|raw }} ...
+                            <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}">
+                                Lire la suite
+                            </a>
+                        </p>
+                    </div>
 
 
-            <article>
+                </section>
+            {% endfor %}
+            <section>
+                <div class="pagination">
+                    <a href="#">Voir toutes les news ></a>
+                </div>
+            </section>
+        </article>
 
-                {% for article in articleList %}
-                    {% if loop.first %}
-                        <header>
-                        <h2>
-                            <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}"></a>{{ article.titre }}
-                        </h2>
-                    {% else %}
-                        <section>
-                        <h3>
-                            <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}"></a>{{ article.titre }}
-                        </h3>
-                    {% endif %}
-                    <img src="{{ vich_uploader_asset(article, 'imageFile') }}"
-                         width="500px" height="375px"
-                         alt="image for : {{ article.titre }}"/>
-                    <p>
-                        {{ article.getPublishedAt|date("d/m/Y H:i") }}
-                    </p>
-                    <p> {{ article.content|striptags|slice(0, 500)|raw }} ...
-                    </p>
-                    <p>
-                        <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}"
-                           class="btn read-more pull-left">Read More</a></p>
-
-
-                    {% if loop.first %}
-                        </header>
-                    {% else %}
-                        </section>
-                    {% endif %}
-                {% endfor %}
-
-            </article>
-
-        </div>
     </div> <!-- #main -->
     <div class="spacer"></div>
 
