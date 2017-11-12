@@ -40,8 +40,6 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    globals:
-        category_service: '@app.category_service'
 
 # Doctrine Configuration
 doctrine:

@@ -227,3 +227,30 @@ button.btn-category {
     margin-left:10px;
   }
 }
+
+.authentification{
+  padding: 200px 200px;
+  margin-bottom: 50px;
+  text-align: center;
+
+  h1{
+    color: $color-txt-important;
+  }
+
+  input{
+    width : 100%;
+    margin-bottom: 10px;
+  }
+
+  .alert-danger{
+    width : 100%;
+    margin-bottom: 10px;
+    background-color: red;
+    color: black;
+  }
+
+  .links{
+    margin-top: 100px;
+  }
+
+}

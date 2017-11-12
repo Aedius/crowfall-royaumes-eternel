@@ -2,43 +2,23 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 
-{% form_theme form _self %}
-
-{% block form_row %}
-    {% spaceless %}
-        <div class="youplay-input">
-            {{ form_errors(form) }}
-            {{ form_widget(form, { 'attr': { 'placeholder': form.vars.label} }) }}
-        </div>
-    {% endspaceless %}
-{% endblock form_row %}
-
 {% block body %}
-    <section class="content-wrap full youplay-login">
+    <div id="main-container">
 
-    <div class="youplay-banner banner-top">
-        <div class="image" style="background-image: url('/assets/images/banner-bg.jpg')">
-        </div>
+        <article>
 
-        <div class="info">
+            {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'authentification'}}) }}
+
+
+            <h1>Registration</h1>
+
+            {{ form_widget(form) }}
             <div>
-                <div class="container align-center">
-                    <div class="youplay-form">
-
-                        <h1>Registration</h1>
-                        <div>
-                            {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-                            {{ form_widget(form) }}
-                            <div>
-                                <button class="btn btn-default db" type="submit" id="_submit"
-                                        name="_submit">{{ 'registration.submit'|trans }}</button>
-                            </div>
-                            {{ form_end(form) }}
-                        </div>
-                    </div>
-                </div>
+                <button class="btn btn-default db" type="submit" id="_submit"
+                        name="_submit">{{ 'registration.submit'|trans }}</button>
             </div>
-        </div>
+            {{ form_end(form) }}
+
+        </article>
     </div>
-    </section>
 {% endblock %}

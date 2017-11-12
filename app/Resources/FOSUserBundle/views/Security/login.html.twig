@@ -2,51 +2,40 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block body %}
+    <div id="main-container">
 
-    <section class="content-wrap full youplay-login">
-    <div class="youplay-banner banner-top">
-        <div class="image" style="background-image: url('/assets/images/banner-bg.jpg')">
-        </div>
+        <article>
 
-        <div class="info">
-            <div>
-                <div class="container align-center">
-                    <div class="youplay-form">
+            <form class="authentification" action="{{ path("fos_user_security_check") }}" method="post">
 
-                        <h1>Login</h1>
+                <h1>Connexion</h1>
 
-                        <form action="{{ path("fos_user_security_check") }}" method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
 
-                            {% if error %}
-                                <div class="alert alert-danger"
-                                     role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                            {% endif %}
+                {% if csrf_token %}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                {% endif %}
 
-                            {% if csrf_token %}
-                                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
-                            {% endif %}
+                    <input type="text" id="username" name="_username" placeholder="Login"
+                           required="required">
+                    <input type="password" id="password" name="_password" placeholder="Password"
+                           required="required">
 
-                            <div class="youplay-input">
-                                <input type="text" id="username" name="_username" placeholder="Login"
-                                       required="required">
-                            </div>
-                            <div class="youplay-input">
-                                <input type="password" id="password" name="_password" placeholder="Password"
-                                       required="required">
-                            </div>
-                            <button class="btn btn-default db" type="submit" id="_submit"
-                                    name="_submit">{{ 'security.login.submit'|trans }}</button>
-                        </form>
+                <button type="submit" id="_submit"
+                        name="_submit">{{ 'security.login.submit'|trans }}</button>
 
-                    </div>
-                    <div class="btn-group social-list dib">
-                        <a class="btn btn-default" href="{{ path('fos_user_registration_register') }}" title="Inscription">Inscription</a>
-                        <a class="btn btn-default" href="{{ path('fos_user_resetting_request') }}" title="Password Oublié">Password oublié</a>
-                    </div>
+
+                <div class="links">
+                    <a href="{{ path('fos_user_registration_register') }}" title="Inscription">< Inscription ></a> |
+                    <a href="{{ path('fos_user_resetting_request') }}" title="Password Oublié">< Password oublié ></a>
                 </div>
-            </div>
-        </div>
+            </form>
+
+
+        </article>
     </div>
-    </section>
+
 
 {% endblock %}
