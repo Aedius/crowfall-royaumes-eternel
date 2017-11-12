@@ -2,8 +2,13 @@
 
 {% block body %}
 
-    {% include 'category/_part/header.html.twig' with { 'category': category } only  %}
+    {% include 'category/_part/header.html.twig' with { 'category': category } only %}
 
-    {% include ':article/_part:list.html.twig' with { 'articleList': articleList } only  %}
+    {% include ':article/_part:list.html.twig' with {
+        'articleList': articleList,
+        'category': category,
+        'page': page,
+        'pageMax': pageMax
+    } only %}
 
 {% endblock %}

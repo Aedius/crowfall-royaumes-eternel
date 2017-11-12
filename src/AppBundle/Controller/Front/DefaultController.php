@@ -6,7 +6,6 @@ use AppBundle\Entity\Article;
 use AppBundle\Entity\Category;
 use AppBundle\Repository\ArticleRepository;
 use AppBundle\Repository\CategoryRepository;
-use Doctrine\ORM\EntityNotFoundException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -66,13 +65,14 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/categorie/{id}/{slug}", name="category_show", requirements={"id": "\d+"})
+     * @Route("/categorie/{id}/{slug}/{page}", name="category_show", requirements={"id": "\d+"} , defaults={"page" = 1} )
      * @param $id
      * @param $slug
+     * @param $page
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function categoryAction($id, $slug)
+    public function categoryAction($id, $slug, $page)
     {
         /** @var CategoryRepository $repo */
         $categoryRepository = $this->getDoctrine()->getRepository(Category::class);
@@ -80,8 +80,8 @@ class DefaultController extends Controller
         /** @var Category|null $category */
         $category = $categoryRepository->find($id);
 
-        if(null === $category){
-            throw new \Exception('do better');
+        if (null === $category) {
+            $this->redirectToRoute('homepage');
         }
 
         if ($category->getSlug() !== $slug) {
@@ -95,15 +95,22 @@ class DefaultController extends Controller
                 ));
         }
 
+        $paginationSize = $this->getParameter('app.pagination');
+
         $articleList = $this->getDoctrine()
             ->getRepository('AppBundle:Article')
-            ->getByCategory($category);
+            ->getByCategory($category, (int)$paginationSize, (int)$page);
 
-
+        $articleCount = $this->getDoctrine()
+            ->getRepository('AppBundle:Article')
+            ->getCountByCategory($category);
 
         return $this->render(':category:show.html.twig', [
             'category' => $category,
             'articleList' => $articleList,
+            'page' => $page,
+            'pageMax' => ceil($articleCount / $paginationSize),
+
         ]);
 
     }

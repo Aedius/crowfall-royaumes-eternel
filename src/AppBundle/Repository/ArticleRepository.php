@@ -14,16 +14,43 @@ use Doctrine\ORM\EntityRepository;
 class ArticleRepository extends EntityRepository
 {
 
-    public function getByCategory(Category $category){
+    /**
+     * @param Category $category
+     * @param int $paginationSize
+     * @param int $page
+     * @return mixed
+     */
+    public function getByCategory(Category $category, $paginationSize, $page)
+    {
         return $this->createQueryBuilder('art')
             ->andWhere('art.published = 1')
             ->andWhere('art.masterCategory = :cat')
-            ->leftJoin('art.categoryList','cat')
+            ->leftJoin('art.categoryList', 'cat')
+            ->orWhere('cat = :cat')
+            ->setParameter('cat', $category)
+            ->orderBy('art.publishedAt', 'desc')
+            ->setMaxResults($paginationSize)
+            ->setFirstResult(($page - 1) * $paginationSize)
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
+     * @param Category $category
+     * @return mixed
+     */
+    public function getCountByCategory(Category $category)
+    {
+        return $this->createQueryBuilder('art')
+            ->select('COUNT(art)')
+            ->andWhere('art.published = 1')
+            ->andWhere('art.masterCategory = :cat')
+            ->leftJoin('art.categoryList', 'cat')
             ->orWhere('cat = :cat')
             ->setParameter('cat', $category)
             ->orderBy('art.publishedAt', 'desc')
             ->getQuery()
-            ->execute();
+            ->getSingleScalarResult();
     }
 
 }

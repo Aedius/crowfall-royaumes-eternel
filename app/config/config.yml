@@ -8,6 +8,7 @@ imports:
 parameters:
     locale: fr
     app.path.article_images : '/upload/article/image'
+    app.pagination : 7
 
 framework:
     #esi:             ~

@@ -1,7 +1,16 @@
 <div id="main-container">
 
     <article>
-
+        {% if home is not defined %}
+            {% if page > 1 %}
+                <section>
+                    <div class="pagination">
+                        <a href="{{ path('category_show', {'id': category.id, 'slug': category.slug, 'page': page - 1}) }}"><
+                            Page Précédente</a>
+                    </div>
+                </section>
+            {% endif %}
+        {% endif %}
         {% for article in articleList %}
             <section>
 
@@ -39,11 +48,23 @@
 
             </section>
         {% endfor %}
-        <section>
-            <div class="pagination">
-                <a href="#">Voir toutes les news ></a>
-            </div>
-        </section>
+        {% if home is defined %}
+            <section>
+                <div class="pagination">
+                    <a href="#">Voir tout les articles ></a>
+                </div>
+            </section>
+        {% else %}
+            {% if page < pageMax %}
+                <section>
+                    <div class="pagination">
+                        <a href="{{ path('category_show', {'id': category.id, 'slug': category.slug, 'page': page + 1}) }}">Page
+                            Suivante ></a>
+                    </div>
+                </section>
+            {% endif %}
+        {% endif %}
+
     </article>
 
 </div>
