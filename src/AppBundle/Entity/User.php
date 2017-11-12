@@ -35,9 +35,9 @@ class User extends BaseUser
     }
 
     /**
-     * @return Collection|\Iterator
+     * @return Collection|\Traversable
      */
-    public function getArticleList(): \Iterator
+    public function getArticleList(): ?\Traversable
     {
         return $this->articleList;
     }

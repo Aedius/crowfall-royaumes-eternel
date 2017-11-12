@@ -16,3 +16,34 @@ easy_admin:
             class: AppBundle\Entity\Version
         Article:
             class: AppBundle\Entity\Article
+            list:
+                fields:
+                    - 'published'
+                    - 'publishedAt'
+                    - 'titre'
+                    - { property: 'image', type: 'image', base_path: '%app.path.article_images%' }
+                    - 'masterCategory'
+                    - 'author'
+            show:
+                fields:
+                    - { property: 'image', type: 'image', base_path: '%app.path.article_images%' }
+                    - 'categoryList'
+                    - 'masterCategory'
+                    - 'titre'
+                    - 'slug'
+                    - 'content'
+                    - 'updatedAt'
+                    - 'published'
+                    - 'publishedAt'
+                    - 'version'
+                    - 'author'
+            form:
+                fields:
+                    - 'titre'
+                    - { property: 'imageFile', type: 'vich_image' }
+                    - { property: 'content', type: 'ckeditor' }
+                    - 'version'
+                    - 'masterCategory'
+                    - 'categoryList'
+                    - 'author'
+                    - 'published'

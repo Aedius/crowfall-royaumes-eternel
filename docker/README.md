@@ -25,6 +25,7 @@ alias symfonyWriter='dc exec php php bin/consoleWriter --env=prod '
 ````
 dc exec php composer install
 symfony doctrine:migrations:migrate
+symfonyAdmin ckeditor:install
 symfony assets:install --symlink
 symfonyAdmin assets:install --symlink
 symfonyWriter assets:install --symlink

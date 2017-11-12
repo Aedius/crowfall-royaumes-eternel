@@ -3,7 +3,8 @@ FROM php:7.1-fpm
 
 RUN apt-get update && apt-get install -y \
     git \
-    unzip
+    unzip \
+    zlib1g-dev
 
 # Set timezone
 RUN rm /etc/localtime
@@ -11,7 +12,7 @@ RUN ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
 RUN "date"
 
 # Type docker-php-ext-install to see available extensions
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install pdo pdo_mysql zip
 
 
 # install xdebug

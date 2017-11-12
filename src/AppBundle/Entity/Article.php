@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Component\Helper\StringHelper;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -129,33 +130,9 @@ class Article
     private $author;
 
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="home", type="boolean")
-     */
-    private $home = true;
-
-
     public function __construct()
     {
         $this->categoryList = new ArrayCollection();
-    }
-
-    /**
-     * @return bool
-     */
-    public function isHome(): bool
-    {
-        return $this->home;
-    }
-
-    /**
-     * @param bool $home
-     */
-    public function setHome(bool $home): void
-    {
-        $this->home = $home;
     }
 
     /**
@@ -196,7 +173,7 @@ class Article
      *
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -318,8 +295,11 @@ class Article
      *
      * @return Article
      */
-    public function setPublished($published): Article
+    public function setPublished(bool $published): Article
     {
+        if( $published && ! $this->getPublished()  ){
+            $this->setPublishedAt(new \DateTime());
+        }
         $this->published = $published;
 
         return $this;
@@ -342,7 +322,7 @@ class Article
      *
      * @return Article
      */
-    public function setPublishedAt($publishedAt): Article
+    public function setPublishedAt(\DateTime $publishedAt): Article
     {
         $this->publishedAt = $publishedAt;
 
@@ -379,6 +359,7 @@ class Article
     public function setTitre(string $titre): Article
     {
         $this->titre = $titre;
+        $this->setSlug(StringHelper::slugify($titre));
 
         return $this;
     }
@@ -418,7 +399,7 @@ class Article
     /**
      * @return \DateTime
      */
-    public function getUpdatedAt(): \DateTime
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
@@ -467,10 +448,10 @@ class Article
     }
 
     /**
-     * @param Category[]|Collection|\Iterator $categoryList
+     * @param Category[]|Collection|\Traversable $categoryList
      * @return Article
      */
-    public function setCategoryList(\Iterator $categoryList): self
+    public function setCategoryList(\Traversable $categoryList): self
     {
         $this->categoryList = $categoryList;
         return $this;
