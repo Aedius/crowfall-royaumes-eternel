@@ -53,4 +53,33 @@ class ArticleRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+    /**
+     * @param int $paginationSize
+     * @param int $page
+     * @return mixed
+     */
+    public function getAll($paginationSize, $page)
+    {
+        return $this->createQueryBuilder('art')
+            ->andWhere('art.published = 1')
+            ->orderBy('art.publishedAt', 'desc')
+            ->setMaxResults($paginationSize)
+            ->setFirstResult(($page - 1) * $paginationSize)
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAllCount()
+    {
+        return $this->createQueryBuilder('art')
+            ->select('COUNT(art)')
+            ->andWhere('art.published = 1')
+            ->orderBy('art.publishedAt', 'desc')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 }

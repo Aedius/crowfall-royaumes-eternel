@@ -53,8 +53,15 @@
                 <ul>
                     {# inverse order because of float : right #}
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <li><a href="{{ path('member_home') }}">compte</a></li>
-
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <li>
+                                <a href="/admin/">Administration</a>
+                            </li>
+                        {% elseif is_granted("ROLE_WRITER") %}
+                            <li>
+                                <a href="/writer/">Admin</a>
+                            </li>
+                        {% endif %}
                         <li>
                             <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
                         </li>
