@@ -6,6 +6,7 @@ use AppBundle\Entity\Article;
 use AppBundle\Entity\Category;
 use AppBundle\Repository\ArticleRepository;
 use AppBundle\Repository\CategoryRepository;
+use Doctrine\ORM\EntityNotFoundException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -58,7 +59,7 @@ class DefaultController extends Controller
                 ));
         }
 
-        return $this->render('show/article.html.twig', [
+        return $this->render(':article:show.html.twig', [
             'article' => $article,
         ]);
 
@@ -68,6 +69,7 @@ class DefaultController extends Controller
      * @Route("/categorie/{id}/{slug}", name="category_show", requirements={"id": "\d+"})
      * @param $id
      * @param $slug
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function categoryAction($id, $slug)
@@ -78,25 +80,28 @@ class DefaultController extends Controller
         /** @var Category|null $category */
         $category = $categoryRepository->find($id);
 
-        if ($category->getSlug() != $slug) {
+        if(null === $category){
+            throw new \Exception('do better');
+        }
+
+        if ($category->getSlug() !== $slug) {
             return $this->redirectToRoute(
                 $this->generateUrl(
                     'category_show',
-                    ['slug' => $category->getSlug(),
-                        'id' => $category->getId()]
+                    [
+                        'slug' => $category->getSlug(),
+                        'id' => $category->getId()
+                    ]
                 ));
         }
 
         $articleList = $this->getDoctrine()
             ->getRepository('AppBundle:Article')
-            ->findBy(
-                array('published' => true, 'category' => $category),
-                array('publishedAt' => 'desc'),
-                8
-            );
+            ->getByCategory($category);
 
 
-        return $this->render('show/category.html.twig', [
+
+        return $this->render(':category:show.html.twig', [
             'category' => $category,
             'articleList' => $articleList,
         ]);

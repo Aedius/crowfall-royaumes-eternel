@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Category;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +13,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class ArticleRepository extends EntityRepository
 {
+
+    public function getByCategory(Category $category){
+        return $this->createQueryBuilder('art')
+            ->andWhere('art.published = 1')
+            ->andWhere('art.masterCategory = :cat')
+            ->leftJoin('art.categoryList','cat')
+            ->orWhere('cat = :cat')
+            ->setParameter('cat', $category)
+            ->orderBy('art.publishedAt', 'desc')
+            ->getQuery()
+            ->execute();
+    }
+
 }

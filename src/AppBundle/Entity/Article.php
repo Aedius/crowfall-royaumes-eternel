@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,7 +19,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class Article
 {
     /**
-     * @var \Doctrine\Common\Collections\Collection|Category[]
+     * @var Collection|Category[]
      *
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="articleList")
      * @ORM\JoinTable(
@@ -31,7 +32,17 @@ class Article
      *  }
      * )
      */
-    protected $categoryList;
+    private $categoryList;
+
+
+    /**
+     * @var Category
+     *
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="masterArticleList")
+     * @Assert\NotBlank()
+     */
+    private $masterCategory;
+
     /**
      * @var int
      *
@@ -40,6 +51,7 @@ class Article
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
     /**
      * @var string
      *
@@ -47,6 +59,7 @@ class Article
      * @Assert\NotBlank()
      */
     private $titre;
+
     /**
      * @var string
      *
@@ -54,12 +67,14 @@ class Article
      * @Assert\NotBlank()
      */
     private $slug;
+
     /**
      * @var string
      *
      * @ORM\Column(name="content", type="text")
      */
     private $content;
+
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
@@ -68,24 +83,28 @@ class Article
      * @var File
      */
     private $imageFile;
+
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @var string
      */
     private $image;
+
     /**
      * @ORM\Column(type="datetime")
      *
      * @var \DateTime
      */
     private $updatedAt;
+
     /**
      * @var bool
      *
      * @ORM\Column(name="published", type="boolean")
      */
     private $published = false;
+
     /**
      * @var \DateTime
      *
@@ -93,6 +112,7 @@ class Article
      * @Assert\Type("\DateTime")
      */
     private $publishedAt;
+
     /**
      * @var Version
      *
@@ -107,6 +127,7 @@ class Article
      * @Assert\NotBlank()
      */
     private $author;
+
 
     /**
      * @var bool
@@ -438,7 +459,7 @@ class Article
     }
 
     /**
-     * @return Category[]|\Doctrine\Common\Collections\Collection
+     * @return Category[]|Collection
      */
     public function getCategoryList()
     {
@@ -446,12 +467,30 @@ class Article
     }
 
     /**
-     * @param Category[]|\Doctrine\Common\Collections\Collection $categoryList
+     * @param Category[]|Collection|\Iterator $categoryList
      * @return Article
      */
-    public function setCategoryList($categoryList)
+    public function setCategoryList(\Iterator $categoryList): self
     {
         $this->categoryList = $categoryList;
+        return $this;
+    }
+
+    /**
+     * @return Category
+     */
+    public function getMasterCategory(): ?Category
+    {
+        return $this->masterCategory;
+    }
+
+    /**
+     * @param Category $masterCategory
+     * @return Article
+     */
+    public function setMasterCategory(Category $masterCategory): self
+    {
+        $this->masterCategory = $masterCategory;
         return $this;
     }
 
