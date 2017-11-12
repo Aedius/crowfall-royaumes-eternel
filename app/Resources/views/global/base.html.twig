@@ -29,6 +29,8 @@
     <meta name="theme-color" content="#ffffff">
     {# END favicon #}
 
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
 
     {% block stylesheets %}
 
@@ -49,8 +51,7 @@
         <header>
             <nav>
                 <ul>
-                    <li><a href="#">Categories</a></li>
-                    <li><a href="#">Outils</a></li>
+                    {# inverse order because of float : right #}
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <li><a href="{{ path('member_home') }}">compte</a></li>
 
@@ -63,6 +64,8 @@
                             <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
                         </li>
                     {% endif %}
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Outils</a></li>
                 </ul>
             </nav>
         </header>
@@ -70,30 +73,34 @@
     <!-- /Navbar -->
 
     <div id="header-container">
-        <h1 class="title"><a href="/">Royaumes Eternels</a></h1>
+        <input type="text" placeholder="Entrez votre recherche..."/>
+        <h2 class="title"><a href="/">Royaumes Eternels</a></h2>
     </div>
 
     <!-- Main Content -->
-    <div id="main-container">
-        {% block body %}{% endblock %}
-    </div>
+    {% block body %}{% endblock %}
     <!-- /Main Content -->
 
 
     <!-- Footer -->
     <div id="footer-container">
-        <footer class="wrapper">
-            <h3>Rejoints la communauté <strong>Crowfall Francophone</strong>
-                <a href="https://discord.gg/AJrPY9v" target="_blank">
-                    <i class="fa fa-external-link-square"></i>
-                    <span>sur Discord</span>
-                </a>
-                ou
-                <a href="https://github.com/Aedius/crowfall-royaumes-eternel" target="_blank">
-                    <i class="fa fa-github-square"></i>
-                    <span>sur Github</span>
-                </a>
-            </h3>
+        <footer>
+
+            <nav>
+                <ul>
+                    <li>
+                        <a href="https://discord.gg/AJrPY9v" target="_blank">
+                            Discord
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Aedius/crowfall-royaumes-eternel" target="_blank">
+                            Github
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
         </footer>
     </div>
 
