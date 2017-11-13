@@ -14,6 +14,12 @@ RUN "date"
 # Type docker-php-ext-install to see available extensions
 RUN docker-php-ext-install pdo pdo_mysql zip
 
+# install imagemagik
+
+RUN apt-get update && apt-get install -y libmagickwand-6.q16-dev --no-install-recommends \
+&& ln -s /usr/lib/x86_64-linux-gnu/ImageMagick-6.8.9/bin-Q16/MagickWand-config /usr/bin \
+&& pecl install imagick \
+&& echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
 
 # install xdebug
 # RUN pecl install xdebug

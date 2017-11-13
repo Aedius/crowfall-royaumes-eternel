@@ -26,6 +26,8 @@ _ressources
 /web/upload/
 !/web/upload/.gitkeep
 /web/css/
+/web/cache/
+!/web/cache/.gitkeep
 
 # PHPUnit
 /app/phpunit.xml

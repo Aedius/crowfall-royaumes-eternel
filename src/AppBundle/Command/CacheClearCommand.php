@@ -24,6 +24,8 @@ class CacheClearCommand extends CacheClearCommandSymfony
         $filesystem->chown('var/', 1000, true);
         $filesystem->chmod('web/upload/', 0777, 0000, true);
         $filesystem->chown('web/upload/', 1000, true);
+        $filesystem->chmod('web/cache/', 0777, 0000, true);
+        $filesystem->chown('web/cache/', 1000, true);
 
     }
 }
