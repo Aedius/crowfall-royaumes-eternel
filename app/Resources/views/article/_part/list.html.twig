@@ -1,0 +1,81 @@
+<div id="main-container">
+
+    <article>
+        {% if home is not defined %}
+            {% if page > 1 %}
+                <section>
+                    <div class="pagination">
+                        {% if all %}
+                            <a href="{{ path('article_all', { 'page': page - 1}) }}"><
+                                Page Précédente</a>
+                        {% else %}
+                            <a href="{{ path('category_show', {'id': category.id, 'slug': category.slug, 'page': page - 1}) }}"><
+                                Page Précédente</a>
+                        {% endif %}
+                    </div>
+                </section>
+            {% endif %}
+        {% endif %}
+        {% for article in articleList %}
+            <section>
+
+                <div class="img-container">
+                    <img src="{{ vich_uploader_asset(article, 'imageFile') }}"
+                         width="240px" height="130px"
+                         alt="image for : {{ article.titre }}"/>
+                </div>
+                <div class="info-container">
+
+                    {% include 'article/_part/categoryList.html.twig' with { 'article': article } only %}
+
+                    {% if loop.first %}
+                        <h2>
+                            <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}">{{ article.titre }}</a>
+                        </h2>
+                    {% else %}
+                        <h3>
+                            <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}">{{ article.titre }}</a>
+                        </h3>
+                    {% endif %}
+                    <p>
+                        Par <a href="#">{{ article.author.username }}</a>,
+                        le {{ article.getPublishedAt|date("d/m/Y à H:i") }} |
+                        <a href="#">🗩 0 commentaire</a>
+
+                    </p>
+                    <p> {{ article.content|striptags|slice(0, 300)|raw }} ...
+                        <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}">
+                            Lire la suite
+                        </a>
+                    </p>
+                </div>
+
+
+            </section>
+        {% endfor %}
+        {% if home is defined %}
+            <section>
+                <div class="pagination">
+                    <a href="{{ path('article_all') }}">Voir tout les articles ></a>
+                </div>
+            </section>
+        {% else %}
+            {% if page < pageMax %}
+                <section>
+                    <div class="pagination">
+                {% if all %}
+                    <a href="{{ path('article_all', { 'page': page +1}) }}">
+                        Page Suivante ></a>
+                {% else %}
+                        <a href="{{ path('category_show', {'id': category.id, 'slug': category.slug, 'page': page + 1}) }}">Page
+                            Suivante ></a>
+                    {% endif %}
+                    </div>
+                </section>
+            {% endif %}
+        {% endif %}
+
+    </article>
+
+</div>
+<div class="spacer"></div>

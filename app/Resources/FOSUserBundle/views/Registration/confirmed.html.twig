@@ -4,30 +4,21 @@
 
 {% block body %}
 
-<section class="content-wrap full youplay-login">
-    <div class="youplay-banner banner-top">
-        <div class="image" style="background-image: url('/assets/images/banner-bg.jpg')">
-        </div>
 
-        <div class="info">
-            <div>
-                <div class="container align-center">
-                    <div class="youplay-form">
+    <div id="main-container">
 
-                        <h1>Bienvenue</h1>
+        <article>
+            <div class="authentification">
+                <h1>Bienvenue</h1>
 
-                        <div class="alert alert-primary" role="alert">
-                            {{ 'registration.confirmed'|trans({'%username%': user.username}) }}
-                        </div>
-
-                        {% if targetUrl %}
-                            <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-                        {% endif %}
-
-                    </div>
+                <div class="alert alert-primary" role="alert">
+                    {{ 'registration.confirmed'|trans({'%username%': user.username}) }}
                 </div>
-            </div>
-        </div>
-    </div>
 
+                {% if targetUrl %}
+                    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+                {% endif %}
+            </div>
+        </article>
+    </div>
 {% endblock %}

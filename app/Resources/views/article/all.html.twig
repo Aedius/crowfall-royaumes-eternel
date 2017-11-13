@@ -1,0 +1,16 @@
+{% extends 'global/base.html.twig' %}
+
+{% block body %}
+
+    <div class="content-header">
+        <h1>Tous les articles</h1>
+    </div>
+
+    {% include ':article/_part:list.html.twig' with {
+        'articleList': articleList,
+        'page': page,
+        'pageMax': pageMax,
+        'all' : true
+    } only %}
+
+{% endblock %}

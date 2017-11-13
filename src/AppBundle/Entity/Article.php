@@ -2,7 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Component\Helper\StringHelper;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,7 +20,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class Article
 {
     /**
-     * @var \Doctrine\Common\Collections\Collection|Category[]
+     * @var Collection|Category[]
      *
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="articleList")
      * @ORM\JoinTable(
@@ -31,7 +33,17 @@ class Article
      *  }
      * )
      */
-    protected $categoryList;
+    private $categoryList;
+
+
+    /**
+     * @var Category
+     *
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="masterArticleList")
+     * @Assert\NotBlank()
+     */
+    private $masterCategory;
+
     /**
      * @var int
      *
@@ -40,6 +52,7 @@ class Article
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
     /**
      * @var string
      *
@@ -47,6 +60,7 @@ class Article
      * @Assert\NotBlank()
      */
     private $titre;
+
     /**
      * @var string
      *
@@ -54,12 +68,14 @@ class Article
      * @Assert\NotBlank()
      */
     private $slug;
+
     /**
      * @var string
      *
      * @ORM\Column(name="content", type="text")
      */
     private $content;
+
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
@@ -68,24 +84,28 @@ class Article
      * @var File
      */
     private $imageFile;
+
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @var string
      */
     private $image;
+
     /**
      * @ORM\Column(type="datetime")
      *
      * @var \DateTime
      */
     private $updatedAt;
+
     /**
      * @var bool
      *
      * @ORM\Column(name="published", type="boolean")
      */
     private $published = false;
+
     /**
      * @var \DateTime
      *
@@ -93,6 +113,7 @@ class Article
      * @Assert\Type("\DateTime")
      */
     private $publishedAt;
+
     /**
      * @var Version
      *
@@ -108,33 +129,10 @@ class Article
      */
     private $author;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="home", type="boolean")
-     */
-    private $home = true;
-
 
     public function __construct()
     {
         $this->categoryList = new ArrayCollection();
-    }
-
-    /**
-     * @return bool
-     */
-    public function isHome(): bool
-    {
-        return $this->home;
-    }
-
-    /**
-     * @param bool $home
-     */
-    public function setHome(bool $home): void
-    {
-        $this->home = $home;
     }
 
     /**
@@ -175,7 +173,7 @@ class Article
      *
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -297,8 +295,11 @@ class Article
      *
      * @return Article
      */
-    public function setPublished($published): Article
+    public function setPublished(bool $published): Article
     {
+        if( $published && ! $this->getPublished()  ){
+            $this->setPublishedAt(new \DateTime());
+        }
         $this->published = $published;
 
         return $this;
@@ -321,7 +322,7 @@ class Article
      *
      * @return Article
      */
-    public function setPublishedAt($publishedAt): Article
+    public function setPublishedAt(\DateTime $publishedAt): Article
     {
         $this->publishedAt = $publishedAt;
 
@@ -358,6 +359,7 @@ class Article
     public function setTitre(string $titre): Article
     {
         $this->titre = $titre;
+        $this->setSlug(StringHelper::slugify($titre));
 
         return $this;
     }
@@ -397,7 +399,7 @@ class Article
     /**
      * @return \DateTime
      */
-    public function getUpdatedAt(): \DateTime
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
@@ -438,7 +440,7 @@ class Article
     }
 
     /**
-     * @return Category[]|\Doctrine\Common\Collections\Collection
+     * @return Category[]|Collection
      */
     public function getCategoryList()
     {
@@ -446,12 +448,30 @@ class Article
     }
 
     /**
-     * @param Category[]|\Doctrine\Common\Collections\Collection $categoryList
+     * @param Category[]|Collection|\Traversable $categoryList
      * @return Article
      */
-    public function setCategoryList($categoryList)
+    public function setCategoryList(\Traversable $categoryList): self
     {
         $this->categoryList = $categoryList;
+        return $this;
+    }
+
+    /**
+     * @return Category
+     */
+    public function getMasterCategory(): ?Category
+    {
+        return $this->masterCategory;
+    }
+
+    /**
+     * @param Category $masterCategory
+     * @return Article
+     */
+    public function setMasterCategory(Category $masterCategory): self
+    {
+        $this->masterCategory = $masterCategory;
         return $this;
     }
 

@@ -3,10 +3,6 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-    app.category_service:
-        class: AppBundle\Service\CategoryService
-        arguments: ["@doctrine.orm.entity_manager"]
-
     app.email_service:
         class: AppBundle\Component\Mail\MailGun
         arguments:

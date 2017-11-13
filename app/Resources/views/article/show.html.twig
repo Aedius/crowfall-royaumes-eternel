@@ -1,14 +1,15 @@
 {% extends 'global/base.html.twig' %}
 
 {% block body %}
+
+
+    {% include 'category/_part/header.html.twig' with { 'category': article.masterCategory } only  %}
+
     <div class="article-content">
 
         <section>
 
-
-            {% for category in article.categoryList %}
-                <button class="btn-category">{{ category.name }}</button>
-            {% endfor %}
+            {% include 'article/_part/categoryList.html.twig' with { 'article': article } only %}
 
             <h1>{{ article.titre }}</h1>
 
@@ -20,8 +21,6 @@
 
             <aside>
                 <div>à lire aussi</div>
-
-
             </aside>
 
             <article>

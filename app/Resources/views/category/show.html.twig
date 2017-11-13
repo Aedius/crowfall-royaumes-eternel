@@ -1,0 +1,15 @@
+{% extends 'global/base.html.twig' %}
+
+{% block body %}
+
+    {% include 'category/_part/header.html.twig' with { 'category': category } only %}
+
+    {% include ':article/_part:list.html.twig' with {
+        'articleList': articleList,
+        'category': category,
+        'page': page,
+        'pageMax': pageMax,
+        'all' : false
+    } only %}
+
+{% endblock %}

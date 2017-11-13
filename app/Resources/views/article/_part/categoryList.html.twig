@@ -1,0 +1,7 @@
+{% include 'category/_part/button.html.twig' with { 'category': article.masterCategory } only %}
+
+{% for category in article.categoryList %}
+    {% if category.id != article.masterCategory.id %}
+        {% include 'category/_part/button.html.twig' with { 'category': category } only %}
+    {% endif %}
+{% endfor %}

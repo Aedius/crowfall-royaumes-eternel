@@ -5,8 +5,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity
@@ -20,6 +20,12 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    /**
+     * @var Article[]
+     *
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="author")
+     */
+    private $articleList;
 
     public function __construct()
     {
@@ -28,18 +34,11 @@ class User extends BaseUser
         // your own logic
     }
 
-
     /**
-     * @var Article[]
-     *
-     * @ORM\OneToMany(targetEntity="Article", mappedBy="author")
+     * @return Collection|\Traversable
      */
-    private $articleList;
-
-    /**
-     * @return Collection
-     */
-    public function getArticleList() {
+    public function getArticleList(): ?\Traversable
+    {
         return $this->articleList;
     }
 

@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use \Doctrine\Common\Collections\Collection;
 
 /**
  * Category
@@ -51,27 +52,18 @@ class Category
     private $description;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection|Article[]
+     * @var Collection|Article[]
      *
      * @ORM\ManyToMany(targetEntity="Article", mappedBy="categoryList")
      */
     private $articleList;
 
     /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * @var Article[]
      *
-     * @Vich\UploadableField(mapping="category_image", fileNameProperty="image")
-     *
-     * @var File
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="masterCategory")
      */
-    private $imageFile;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @var string
-     */
-    private $image;
+    private $masterArticleList;
 
     /**
      * @ORM\Column(type="datetime")
@@ -122,9 +114,9 @@ class Category
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getName() ?? '';
+        return (string)($this->getName() ?? '');
     }
 
     /**
@@ -132,7 +124,7 @@ class Category
      *
      * @return string
      */
-    public function getName()
+    public function getName():?string
     {
         return $this->name;
     }
@@ -144,7 +136,7 @@ class Category
      *
      * @return Category
      */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -154,75 +146,25 @@ class Category
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription():?string
     {
         return $this->description;
     }
 
     /**
      * @param string $description
+     * @return Category
      */
-    public function setDescription($description)
+    public function setDescription($description): self
     {
         $this->description = $description;
-    }
-
-    /**
-     * @return File|null
-     */
-    public function getImageFile()
-    {
-        return $this->imageFile;
-    }
-
-    /**
-     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
-     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
-     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
-     * must be able to accept an instance of 'File' as the bundle will inject one here
-     * during Doctrine hydration.
-     *
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
-     *
-     * @return Category
-     */
-    public function setImageFile(File $image = null)
-    {
-        $this->imageFile = $image;
-
-        if ($image) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param string $image
-     *
-     * @return Category
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
         return $this;
     }
 
     /**
      * @return \DateTime
      */
-    public function getUpdatedAt(): \DateTime
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
@@ -240,7 +182,7 @@ class Category
     /**
      * @param Article $article
      */
-    public function addArticle(Article $article)
+    public function addArticle(Article $article): void
     {
         if ($this->articleList->contains($article)) {
             return;
@@ -252,7 +194,7 @@ class Category
     /**
      * @param Article $article
      */
-    public function removeArticle(Article $article)
+    public function removeArticle(Article $article): void
     {
         if (!$this->articleList->contains($article)) {
             return;
@@ -262,20 +204,39 @@ class Category
     }
 
     /**
-     * @return Article[]|\Doctrine\Common\Collections\Collection
+     * @return Article[]|Collection|\Traversable
      */
-    public function getArticleList()
+    public function getArticleList(): \Traversable
     {
         return $this->articleList;
     }
 
     /**
-     * @param Article[]|\Doctrine\Common\Collections\Collection $articleList
+     * @param Article[]|Collection $articleList
      * @return Category
      */
-    public function setArticleList($articleList)
+    public function setArticleList($articleList): self
     {
         $this->articleList = $articleList;
+        return $this;
+    }
+
+    /**
+     * @return Article[]|Collection|\Traversable
+     */
+    public function getMasterArticleList(): ?\Traversable
+    {
+        return $this->masterArticleList;
+    }
+
+    /**
+     * @param Article[]|\Traversable $masterArticleList
+     * @return Category
+     */
+    public function setMasterArticleList(\Traversable $masterArticleList): self
+    {
+        $this->masterArticleList = $masterArticleList;
+
         return $this;
     }
 
