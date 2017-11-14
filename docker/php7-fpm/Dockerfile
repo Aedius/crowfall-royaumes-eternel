@@ -4,7 +4,8 @@ FROM php:7.1-fpm
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
-    zlib1g-dev
+    zlib1g-dev \
+    mysql-client
 
 # Set timezone
 RUN rm /etc/localtime

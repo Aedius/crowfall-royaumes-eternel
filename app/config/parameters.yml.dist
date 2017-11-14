@@ -20,3 +20,10 @@ parameters:
 
     # MailGun ApiKey
     mailgunKey: key-some-private-key
+
+    # Dropbox
+    dropbox_token:
+    dropbox_key:
+    dropbox_secret:
+    dropbox_app:
+    dropbox_root:
