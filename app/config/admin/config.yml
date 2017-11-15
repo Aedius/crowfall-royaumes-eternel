@@ -47,3 +47,24 @@ easy_admin:
                     - 'categoryList'
                     - 'author'
                     - 'published'
+
+bm_backup_manager:
+    database:
+        production:
+            type: mysql
+            host: "%database_host%"
+            port: "%database_port%"
+            user: "%database_user%"
+            pass: "%database_password%"
+            database: "%database_name%"
+    storage:
+        local:
+             type: Local
+             root: "%kernel.root_dir%/var/backup/"
+        dropbox:
+            type: Dropbox
+            token: "%dropbox_token%"
+            key: "%dropbox_key%"
+            secret: "%dropbox_secret%"
+            app: "%dropbox_app%"
+            root: "%dropbox_root%"

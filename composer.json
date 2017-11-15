@@ -10,6 +10,18 @@
     "autoload-dev": {
         "psr-4": { "Tests\\": "tests/" }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/aedius/symfony",
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/Aedius/symfony/archive/master.zip"
+        }
+      }
+    ],
     "require": {
         "php": ">=7.0",
         "symfony/symfony": "3.*",
@@ -29,7 +41,9 @@
         "mailgun/mailgun-php": "^2.3",
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/message": "^1.6",
-        "javiereguiluz/easyadmin-bundle": "^1.17"
+        "javiereguiluz/easyadmin-bundle": "^1.17",
+        "backup-manager/symfony":"dev-dropbox",
+        "egeloen/ckeditor-bundle": "^6.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
