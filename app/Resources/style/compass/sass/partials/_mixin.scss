@@ -24,11 +24,11 @@
   height: $height;
 }
 
-@mixin link() {
-  color: $color-txt-important;
+@mixin link($color, $colorHover) {
+  color: $color;
   text-decoration: none;
 
   &:hover {
-    color: #76CFEF;
+    color: $colorHover;
   }
 }

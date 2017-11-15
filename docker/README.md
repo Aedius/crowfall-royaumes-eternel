@@ -1,5 +1,3 @@
-base on https://github.com/maxpou/docker-symfony
-
 ###alias : 
 
 ###### for preprod :
