@@ -21,6 +21,20 @@
 
             <aside>
                 <div>à lire aussi</div>
+                {% for articleSide in articleSideList %}
+                    <div>
+                    <div class="image-container">
+                        <img src="/cache/140x80{{ vich_uploader_asset(articleSide, 'imageFile') }}"
+                             alt="image for : {{ articleSide.titre }}"
+                             width="140px"
+                             height="80px"
+                        />
+                    </div>
+                    <h5>{{ articleSide.titre }}</h5>
+                        Par <a href="#">{{ articleSide.author.username }}</a>,
+                        le {{ articleSide.getPublishedAt|date("d/m/Y") }}
+                    </div>
+                {% endfor %}
             </aside>
 
             <article>
@@ -33,7 +47,6 @@
                     />
                 </div>
                 {{ article.content|raw }}
-
 
 
             </article>

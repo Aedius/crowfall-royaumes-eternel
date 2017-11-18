@@ -40,13 +40,17 @@ switch ($resizeType) {
         $rszWidthGoal = 1190;
         $rszHeightGoal = 440;
         break;
+    case '340x190':
+        $rszWidthGoal = 340;
+        $rszHeightGoal = 190;
+        break;
     case '240x130':
         $rszWidthGoal = 240;
         $rszHeightGoal = 130;
         break;
-    case '340x190':
-        $rszWidthGoal = 340;
-        $rszHeightGoal = 190;
+    case '140x80':
+        $rszWidthGoal = 140;
+        $rszHeightGoal = 80;
         break;
     default:
         /**

@@ -37,8 +37,11 @@ class ArticleController extends Controller
                 ));
         }
 
+        $articleSideList = $articleRepository->getAll(3,1);
+
         return $this->render(':article:show.html.twig', [
             'article' => $article,
+            'articleSideList' => $articleSideList,
         ]);
 
     }
@@ -52,7 +55,6 @@ class ArticleController extends Controller
      */
     public function allArticleAction( $page )
     {
-
 
         $paginationSize = $this->getParameter('app.pagination');
 
