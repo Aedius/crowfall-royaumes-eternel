@@ -6,9 +6,8 @@ use AppBundle\Component\Helper\Pagination;
 use AppBundle\Entity\Version;
 use AppBundle\Repository\VersionRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class VersionController extends Controller
+class VersionController extends BaseController
 {
     /**
      * @Route("/version/{id}/{slug}/{page}", name="version_show", requirements={"id": "\d+"} , defaults={"page" = 1} )

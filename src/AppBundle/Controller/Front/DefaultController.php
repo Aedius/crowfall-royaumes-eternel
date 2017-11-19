@@ -4,9 +4,8 @@ namespace AppBundle\Controller\Front;
 
 use AppBundle\Component\Helper\Pagination;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
+class DefaultController extends BaseController
 {
 
     /**

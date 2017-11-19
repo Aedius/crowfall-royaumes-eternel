@@ -6,9 +6,8 @@ use AppBundle\Component\Helper\Pagination;
 use AppBundle\Entity\Category;
 use AppBundle\Repository\CategoryRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
     /**
      * @Route("/categorie/{id}/{slug}/{page}", name="category_show", requirements={"id": "\d+"} , defaults={"page" = 1} )
@@ -20,7 +19,7 @@ class CategoryController extends Controller
      */
     public function categoryAction($id, $slug, $page)
     {
-        /** @var CategoryRepository $repo */
+        /** @var CategoryRepository $categoryRepository */
         $categoryRepository = $this->getDoctrine()->getRepository(Category::class);
 
         /** @var Category|null $category */
@@ -56,14 +55,14 @@ class CategoryController extends Controller
         $pagination = new Pagination();
         if ($page > 1) {
             $pagination
-                ->setPreviousPageWording('Articles "'.$category->getName().'" prédédents')
+                ->setPreviousPageWording('Articles "' . $category->getName() . '" prédédents')
                 ->setPreviousPageUrl(
                     $router->generate('category_show', ['id' => $id, 'slug' => $slug, 'page' => $page - 1])
                 );
         }
         if ($page < ceil($articleCount / $paginationSize)) {
             $pagination
-                ->setNextPageWording('Articles "'.$category->getName().'" suivants')
+                ->setNextPageWording('Articles "' . $category->getName() . '" suivants')
                 ->setNextPageUrl(
                     $router->generate('category_show', ['id' => $id, 'slug' => $slug, 'page' => $page + 1])
                 );

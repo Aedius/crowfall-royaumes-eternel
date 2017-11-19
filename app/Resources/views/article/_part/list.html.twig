@@ -1,24 +1,6 @@
 <div id="main-container">
 
     <article>
-
-        {#
-        {% if home is not defined %}
-            {% if page > 1 %}
-                <section>
-                    <div class="pagination">
-                        {% if all %}
-                            <a href="{{ path('article_all', { 'page': page - 1}) }}"><
-                                Page Précédente</a>
-                        {% else %}
-                            <a href="{{ path('category_show', {'id': category.id, 'slug': category.slug, 'page': page - 1}) }}"><
-                                Page Précédente</a>
-                        {% endif %}
-                    </div>
-                </section>
-            {% endif %}
-        {% endif %}
-        #}
         {% if pagination.previousPageUrl %}
         <section>
             <div class="pagination">
@@ -74,29 +56,6 @@
                 </div>
             </section>
         {% endif %}
-        {#
-        {% if home is defined %}
-            <section>
-                <div class="pagination">
-                    <a href="{{ path('article_all') }}">Voir tout les articles ></a>
-                </div>
-            </section>
-        {% else %}
-            {% if page < pageMax %}
-                <section>
-                    <div class="pagination">
-                        {% if all %}
-                            <a href="{{ path('article_all', { 'page': page +1}) }}">
-                                Page Suivante ></a>
-                        {% else %}
-                            <a href="{{ path('category_show', {'id': category.id, 'slug': category.slug, 'page': page + 1}) }}">Page
-                                Suivante ></a>
-                        {% endif %}
-                    </div>
-                </section>
-            {% endif %}
-        {% endif %}
-        #}
 
     </article>
 
