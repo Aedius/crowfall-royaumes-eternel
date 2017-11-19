@@ -60,3 +60,9 @@ dc exec php composer require john/doe
 dc exec php composer update
 symfony doctrine:migrations:diff 
 ````
+
+### prod command : 
+
+````
+0 7 * * * cd /space/crowfall-royaumes-eternel/docker/ && ./backup.sh > /var/log/backup.log 2>&1
+````
