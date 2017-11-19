@@ -84,11 +84,14 @@ bm_backup_manager:
     storage:
         local:
              type: Local
-             root: "%kernel.root_dir%/var/backup/"
+             root: "%app.backup_dir%"
+
+oneup_flysystem:
+    adapters:
+        dropbox_adapter:
+            dropbox:
+                client: app.dropbox_client
+                prefix: '%kernel.environment%'
+    filesystems:
         dropbox:
-            type: Dropbox
-            token: "%dropbox_token%"
-            key: "%dropbox_key%"
-            secret: "%dropbox_secret%"
-            app: "%dropbox_app%"
-            root: "%dropbox_root%"
+            adapter: dropbox_adapter

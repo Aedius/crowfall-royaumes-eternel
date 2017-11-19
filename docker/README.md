@@ -49,7 +49,7 @@ docker run -it --rm -v /etc/letsencrypt:/etc/letsencrypt -v /data/letsencrypt:/d
 
 ````
 symfonyAdmin app:backup
-symfonyAdmin app:restore backup2017-11-14_22-54-07.sql.gz
+symfonyAdmin app:restore backup2017-11/14_22-54-07.sql.gz
 ````
 
 ### dev command :

@@ -26,3 +26,7 @@ services:
                 confirmation.template: %fos_user.registration.confirmation.template%
                 resetting_password.template: %fos_user.resetting.email.template%
 
+    app.dropbox_client:
+        class: Spatie\Dropbox\Client
+        arguments:
+            - "%dropbox_token%"

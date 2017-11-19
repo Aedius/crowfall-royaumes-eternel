@@ -10,6 +10,8 @@ parameters:
     app.path.article_images : '/upload/article/image'
     app.path.slide_images : '/upload/slide/image'
     app.pagination : 7
+    app.backup_dir : "%kernel.root_dir%/../var/backup/"
+    app.upload_dir : "%kernel.root_dir%/../web/upload/"
 
 framework:
     #esi:             ~
@@ -82,7 +84,7 @@ vich_uploader:
     mappings:
         article_image:
             uri_prefix:         '%app.path.article_images%'
-            upload_destination: '%kernel.root_dir%/../web/upload/article/image'
+            upload_destination: '%app.upload_dir%article/image'
         slide_image:
             uri_prefix:         '%app.path.slide_images%'
-            upload_destination: '%kernel.root_dir%/../web/upload/slide/image'
+            upload_destination: '%app.upload_dir%slide/image'

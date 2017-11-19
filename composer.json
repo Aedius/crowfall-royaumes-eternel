@@ -42,8 +42,10 @@
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/message": "^1.6",
         "javiereguiluz/easyadmin-bundle": "^1.17",
-        "backup-manager/symfony":"dev-dropbox",
-        "egeloen/ckeditor-bundle": "^6.0"
+        "backup-manager/symfony":"^1.1",
+        "egeloen/ckeditor-bundle": "^6.0",
+        "oneup/flysystem-bundle": "^3.0",
+        "spatie/flysystem-dropbox": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
