@@ -12,4 +12,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+    /**
+     * @return mixed
+     */
+    public function getCategoryWithArticle()
+    {
+        return $this->createQueryBuilder('cat')
+            ->leftJoin('cat.articleList', 'art')
+            ->orWhere('art.published = 1')
+            ->leftJoin('cat.masterArticleList', 'artMaster')
+            ->orWhere('art.published = 1')
+            ->orWhere('artMaster.published = 1')
+            ->orderBy('cat.name', 'asc')
+            ->getQuery()
+            ->execute();
+    }
+
 }

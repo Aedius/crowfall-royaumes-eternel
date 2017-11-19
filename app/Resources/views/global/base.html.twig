@@ -71,8 +71,19 @@
                             <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
                         </li>
                     {% endif %}
-                    <li><a href="#">Categories</a></li>
-                    <li><a href="#">Outils</a></li>
+
+                    {% if menu_category|length %}
+                        <li class="dropdown">
+                            <button class="dropbtn">↯ Categories</button>
+                            <ul class="dropdown-content">
+                                {% for category in menu_category %}
+                                    <li>
+                                        <a href="{{ path('category_show', {'id': category.id, 'slug': category.slug }) }}">{{ category.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endif %}
                 </ul>
             </nav>
         </header>
