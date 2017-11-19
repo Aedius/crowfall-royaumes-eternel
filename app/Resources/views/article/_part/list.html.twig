@@ -32,7 +32,7 @@
                         </h3>
                     {% endif %}
                     <p>
-                        Par <a href="#">{{ article.author.username }}</a>,
+                        Par <a href="{{ path('user_article_show', {'id': article.author.id, 'slug': article.author.usernameCanonical }) }}">{{ article.author.username }}</a>,
                         le {{ article.getPublishedAt|date("d/m/Y à H:i") }} |
                         <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}#comment">🗩 {{ article.commentList|length }}
                             commentaire{% if article.commentList|length >1 %}s{% endif %}</a>
