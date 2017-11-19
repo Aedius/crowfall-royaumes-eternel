@@ -121,8 +121,9 @@ body {
   text-align: center;
   color: $color-txt-important;
   padding: 10px 0;
-  .news-title {
-    font-weight: 300;
+
+  a{
+    @include link($color-txt-important, $color-link);
   }
 }
 

@@ -41,3 +41,5 @@ easy_admin:
                     - 'categoryList'
                     - 'author'
                     - 'published'
+        Quickie:
+            class: AppBundle\Entity\Quickie

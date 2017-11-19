@@ -10,12 +10,19 @@
         </div>
     </div>
     <div id="news">
-        <span class="news-title">Prochaine campagne :</span><br/>
-        <span class="news-content">Le 09/12/2019 campagne "bain de sang" ! Chacun pour soi, pas d'import </span>
+        {% if quickie %}
+            <a href="{{ quickie.url }}">
+                {{ quickie.content|nl2br }}
+            </a>
+        {% else %}
+            <a href="https://discord.gg/4zbKY5Z">
+                Bienvenue sur le site de la communauté francophone de Crowfall<br/>
+                Rejoins nous sur Discord
+            </a>
+        {% endif %}
     </div>
     <div class="spacer"></div>
 
     {% include ':article/_part:list.html.twig' with { 'articleList': articleList, 'pagination': pagination  } only %}
-
 
 {% endblock %}
