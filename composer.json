@@ -42,7 +42,7 @@
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/message": "^1.6",
         "javiereguiluz/easyadmin-bundle": "^1.17",
-        "backup-manager/symfony":"dev-dropbox",
+        "backup-manager/symfony":"^1.1",
         "egeloen/ckeditor-bundle": "^6.0"
     },
     "require-dev": {

@@ -33,7 +33,7 @@ class RestoreCommand extends ContainerAwareCommand
         }
 
         $restore = $this->getContainer()->get('backup_manager')->makeRestore();
-        $restore->run('dropbox', $name, 'production', 'gzip');
+        $restore->run('local', $name, 'production', 'gzip');
 
 
     }

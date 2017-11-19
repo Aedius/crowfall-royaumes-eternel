@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0cfba8e2d32753f102b41cd924b51104",
+    "content-hash": "a84961fe0a8073881787f129a73fa922",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -71,40 +71,39 @@
         },
         {
             "name": "backup-manager/backup-manager",
-            "version": "dev-master",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/backup-manager/backup-manager.git",
-                "reference": "9b59c5258b7e71b765d229033bf5d16f984cc222"
+                "reference": "9e53714a993135f57fe2bff001203b6f75c2387c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/backup-manager/backup-manager/zipball/9b59c5258b7e71b765d229033bf5d16f984cc222",
-                "reference": "9b59c5258b7e71b765d229033bf5d16f984cc222",
+                "url": "https://api.github.com/repos/backup-manager/backup-manager/zipball/9e53714a993135f57fe2bff001203b6f75c2387c",
+                "reference": "9e53714a993135f57fe2bff001203b6f75c2387c",
                 "shasum": ""
             },
             "require": {
                 "league/flysystem": "~1.0",
                 "php": ">=5.5.9",
-                "symfony/process": "~2.1|~3.0|~4.0"
+                "symfony/process": "~2.1|~3.0"
             },
             "require-dev": {
                 "aws/aws-sdk-php": "~3.0",
                 "dropbox/dropbox-sdk": "~1.1",
                 "league/flysystem-aws-s3-v3": "~1.0",
+                "league/flysystem-dropbox": "~1.0",
                 "league/flysystem-rackspace": "~1.0",
                 "league/flysystem-sftp": "~1.0",
                 "mockery/mockery": "~0.9",
                 "phpspec/phpspec": "~2.1",
-                "satooshi/php-coveralls": "~0.6",
-                "srmklive/flysystem-dropbox-v2": "~1.0"
+                "satooshi/php-coveralls": "~0.6"
             },
             "suggest": {
-                "league/flysystem-aws-s3-v2": "GoogleCS adapter support.",
-                "league/flysystem-aws-s3-v3": "AwsS3 adapter support.",
+                "league/flysystem-aws-s3-v3": "AwsS3 and GoogleCS adapter support.",
+                "league/flysystem-dropbox": "Dropbox adapter support.",
                 "league/flysystem-rackspace": "Rackspace adapter support.",
-                "league/flysystem-sftp": "Sftp adapter support.",
-                "srmklive/flysystem-dropbox-v2": "Dropbox API v2 adapter support."
+                "league/flysystem-sftp": "Sftp adapter support."
             },
             "type": "library",
             "extra": {
@@ -134,29 +133,29 @@
                 }
             ],
             "description": "A framework agnostic database backup manager with user-definable procedures and support for S3, Dropbox, FTP, SFTP, and more with drivers for popular frameworks.",
-            "time": "2017-11-18T14:47:33+00:00"
+            "time": "2017-01-05T12:10:13+00:00"
         },
         {
             "name": "backup-manager/symfony",
-            "version": "dev-dropbox",
+            "version": "v1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aedius/symfony.git",
-                "reference": "2b9a113b25ffaf286955971bf856402e36337d44"
+                "reference": "38185c38448689d36fc3599a97e0a4a729a44a28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aedius/symfony/zipball/2b9a113b25ffaf286955971bf856402e36337d44",
-                "reference": "2b9a113b25ffaf286955971bf856402e36337d44",
+                "url": "https://api.github.com/repos/Aedius/symfony/zipball/38185c38448689d36fc3599a97e0a4a729a44a28",
+                "reference": "38185c38448689d36fc3599a97e0a4a729a44a28",
                 "shasum": ""
             },
             "require": {
-                "backup-manager/backup-manager": "dev-master",
+                "backup-manager/backup-manager": "^1.0",
                 "league/flysystem-aws-s3-v2": "^1.0",
+                "league/flysystem-dropbox": "^1.0",
                 "league/flysystem-rackspace": "^1.0",
                 "league/flysystem-sftp": "^1.0",
                 "php": ">=5.5",
-                "srmklive/flysystem-dropbox-v2": "^1.0",
                 "symfony/class-loader": "~2.2 || ~3.1",
                 "symfony/config": "~2.3 || ~3.1",
                 "symfony/dependency-injection": "~2.3 || ~3.1",
@@ -189,9 +188,9 @@
                 "database"
             ],
             "support": {
-                "source": "https://github.com/Aedius/symfony/tree/dropbopx-v2"
+                "source": "https://github.com/Aedius/symfony/tree/v1.1"
             },
-            "time": "2017-11-14T22:07:11+00:00"
+            "time": "2017-03-13T14:24:32+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -1253,6 +1252,45 @@
             "time": "2017-10-23T18:21:04+00:00"
         },
         {
+            "name": "dropbox/dropbox-sdk",
+            "version": "v1.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dropbox/dropbox-sdk-php.git",
+                "reference": "0f1a178ca9c0271bca6426dde8f5a2241578deae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dropbox/dropbox-sdk-php/zipball/0f1a178ca9c0271bca6426dde8f5a2241578deae",
+                "reference": "0f1a178ca9c0271bca6426dde8f5a2241578deae",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">= 5.3"
+            },
+            "require-dev": {
+                "apigen/apigen": "4.1.2",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "2.0.0RC3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Dropbox": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Dropbox SDK for PHP",
+            "keywords": [
+                "dropbox"
+            ],
+            "time": "2016-08-08T23:48:49+00:00"
+        },
+        {
             "name": "egeloen/ckeditor-bundle",
             "version": "6.0.1",
             "source": {
@@ -2149,6 +2187,53 @@
             ],
             "description": "Flysystem adapter for AWS S3 SDK v2",
             "time": "2015-10-15T15:55:48+00:00"
+        },
+        {
+            "name": "league/flysystem-dropbox",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/flysystem-dropbox.git",
+                "reference": "939f91ca00d0255d9b3aa313e191480d00f09382"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-dropbox/zipball/939f91ca00d0255d9b3aa313e191480d00f09382",
+                "reference": "939f91ca00d0255d9b3aa313e191480d00f09382",
+                "shasum": ""
+            },
+            "require": {
+                "dropbox/dropbox-sdk": "~1.1",
+                "league/flysystem": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Flysystem\\Dropbox\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Frank de Jonge",
+                    "email": "info@frenky.net"
+                }
+            ],
+            "description": "Flysystem adapter for Dropbox",
+            "abandoned": "spatie/flysystem-dropbox",
+            "time": "2016-04-25T18:51:39+00:00"
         },
         {
             "name": "league/flysystem-rackspace",
@@ -3697,55 +3782,6 @@
             "time": "2017-10-29T18:48:08+00:00"
         },
         {
-            "name": "srmklive/flysystem-dropbox-v2",
-            "version": "v1.0.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/srmklive/flysystem-dropbox-v2.git",
-                "reference": "4d46205ec09247e936656724102bc5ba27c95587"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/srmklive/flysystem-dropbox-v2/zipball/4d46205ec09247e936656724102bc5ba27c95587",
-                "reference": "4d46205ec09247e936656724102bc5ba27c95587",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^6.2",
-                "league/flysystem": "~1.0",
-                "php": ">=5.5.9"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8|^5.7|^6.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Srmklive\\Dropbox\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Raza Mehdi",
-                    "email": "srmk@outlook.com"
-                }
-            ],
-            "description": "Flysystem Adapter for Dropbox API v2",
-            "homepage": "https://github.com/srmklive/flysystem-dropbox-v2",
-            "keywords": [
-                "Dropbox-API",
-                "api",
-                "dropbox",
-                "srmklive",
-                "v2"
-            ],
-            "time": "2017-10-20T15:24:32+00:00"
-        },
-        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.8",
             "source": {
@@ -4976,9 +5012,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "backup-manager/symfony": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

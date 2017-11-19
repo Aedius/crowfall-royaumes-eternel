@@ -34,7 +34,7 @@ class BackupCommand extends ContainerAwareCommand
         $date = new \DateTime();
 
         $destinationList = [
-            new Destination('dropbox', 'backup'.$date->format('Y-m-d_H-i-s').'.sql')
+            new Destination('local', 'backup'.$date->format('Y-m').'/'.$date->format('d_H-i-s').'.sql')
         ];
 
         $backup = $this->getContainer()
