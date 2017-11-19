@@ -1,6 +1,8 @@
 <div id="main-container">
 
     <article>
+
+        {#
         {% if home is not defined %}
             {% if page > 1 %}
                 <section>
@@ -16,6 +18,16 @@
                 </section>
             {% endif %}
         {% endif %}
+        #}
+        {% if pagination.previousPageUrl %}
+        <section>
+            <div class="pagination">
+                <a href="{{ pagination.previousPageUrl }}">
+                   < {{ pagination.previousPageWording|default('page prédédente') }}</a>
+            </div>
+        </section>
+        {% endif %}
+
         {% for article in articleList %}
             <section>
 
@@ -26,7 +38,7 @@
                 </div>
                 <div class="info-container">
 
-                    {% include 'article/_part/categoryList.html.twig' with { 'article': article } only %}
+                    {% include 'global/_part/buttonList.html.twig' with { 'article': article } only %}
 
                     {% if loop.first %}
                         <h2>
@@ -54,6 +66,15 @@
 
             </section>
         {% endfor %}
+        {% if pagination.nextPageUrl %}
+            <section>
+                <div class="pagination">
+                    <a href="{{ pagination.nextPageUrl }}">
+                        {{ pagination.nextPageWording|default('page suivante') }} ></a>
+                </div>
+            </section>
+        {% endif %}
+        {#
         {% if home is defined %}
             <section>
                 <div class="pagination">
@@ -75,6 +96,7 @@
                 </section>
             {% endif %}
         {% endif %}
+        #}
 
     </article>
 

@@ -176,20 +176,11 @@ body {
 }
 
 .btn-category {
-  background-color: $color-btn-category;
-  border: none;
-  color: white;
-  text-align: center;
-  border-radius: 5px;
-  font-size: 0.6em;
-  padding: 3px 6px;
-  margin-right: 5px;
-  text-decoration: none;
+  @include btn-link($color-btn-category)
+}
 
-  &:hover {
-    color: $color-btn-category;
-    background-color: white;
-  }
+.btn-version{
+  @include btn-link($color-btn-version)
 }
 
 .article-content {

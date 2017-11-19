@@ -19,8 +19,8 @@ fi
 
 
 $docomp exec php composer install
-$symfony doctrine:migrations:migrate
-$symfonyAdmin ckeditor:install --clear=drop
+$symfony doctrine:migrations:migrate --no-interaction
+$symfonyAdmin ckeditor:install --clear=skip
 $symfony assets:install --symlink
 $symfonyAdmin assets:install --symlink
 $symfonyWriter assets:install --symlink

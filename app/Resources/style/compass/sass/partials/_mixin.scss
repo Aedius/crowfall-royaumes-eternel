@@ -32,3 +32,20 @@
     color: $colorHover;
   }
 }
+
+@mixin btn-link($color){
+  background-color: $color;
+  border: none;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 0.6em;
+  padding: 3px 6px;
+  margin-right: 5px;
+  text-decoration: none;
+
+  &:hover {
+    color: $color;
+    background-color: white;
+  }
+}

@@ -2,11 +2,10 @@
 
 {% block body %}
 
-    {% include 'category/_part/header.html.twig' with { 'category': category } only %}
+    {% include 'version/_part/header.html.twig' with { 'version': version } only %}
 
     {% include ':article/_part:list.html.twig' with {
         'articleList': articleList,
-        'category': category,
         'pagination': pagination
     } only %}
 

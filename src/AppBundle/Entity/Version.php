@@ -2,9 +2,11 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Component\Helper\StringHelper;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Version
@@ -29,6 +31,14 @@ class Version
      * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     */
+    private $slug;
 
     /**
      * @var \DateTime
@@ -153,6 +163,24 @@ class Version
     {
         $this->name = $name;
 
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     * @return Version
+     */
+    public function setSlug(string $slug): Version
+    {
+        $this->slug = StringHelper::slugify($slug);
         return $this;
     }
 

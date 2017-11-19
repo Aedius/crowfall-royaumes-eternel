@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Component\Helper\StringHelper;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -106,7 +107,7 @@ class Category
      */
     public function setSlug(string $slug): Category
     {
-        $this->slug = $slug;
+        $this->slug = StringHelper::slugify($slug);
 
         return $this;
     }
