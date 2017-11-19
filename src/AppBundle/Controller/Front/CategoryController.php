@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Front;
 
+use AppBundle\Component\Helper\Pagination;
 use AppBundle\Entity\Category;
 use AppBundle\Repository\CategoryRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -50,11 +51,28 @@ class CategoryController extends Controller
             ->getRepository('AppBundle:Article')
             ->getCountByCategory($category);
 
+
+        $router = $this->get('router');
+        $pagination = new Pagination();
+        if ($page > 1) {
+            $pagination
+                ->setPreviousPageWording('Articles "'.$category->getName().'" prédédents')
+                ->setPreviousPageUrl(
+                    $router->generate('category_show', ['id' => $id, 'slug' => $slug, 'page' => $page - 1])
+                );
+        }
+        if ($page < ceil($articleCount / $paginationSize)) {
+            $pagination
+                ->setNextPageWording('Articles "'.$category->getName().'" suivants')
+                ->setNextPageUrl(
+                    $router->generate('category_show', ['id' => $id, 'slug' => $slug, 'page' => $page + 1])
+                );
+        }
+
         return $this->render(':category:show.html.twig', [
             'category' => $category,
             'articleList' => $articleList,
-            'page' => $page,
-            'pageMax' => ceil($articleCount / $paginationSize),
+            'pagination' => $pagination,
 
         ]);
 

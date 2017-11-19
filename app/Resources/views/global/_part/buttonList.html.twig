@@ -1,3 +1,7 @@
+{% if article.version %}
+    {% include 'version/_part/button.html.twig' with { 'version': article.version } only %}
+{% endif %}
+
 {% include 'category/_part/button.html.twig' with { 'category': article.masterCategory } only %}
 
 {% for category in article.categoryList %}

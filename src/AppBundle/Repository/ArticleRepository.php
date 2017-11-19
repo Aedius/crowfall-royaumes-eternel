@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Version;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -48,6 +49,41 @@ class ArticleRepository extends EntityRepository
             ->leftJoin('art.categoryList', 'cat')
             ->orWhere('cat = :cat')
             ->setParameter('cat', $category)
+            ->orderBy('art.publishedAt', 'desc')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * @param Version $version
+     * @param int $paginationSize
+     * @param int $page
+     * @return mixed
+     */
+    public function getByVersion(Version $version, $paginationSize, $page)
+    {
+        return $this->createQueryBuilder('art')
+            ->andWhere('art.published = 1')
+            ->andWhere('art.version = :version')
+            ->setParameter('version', $version)
+            ->orderBy('art.publishedAt', 'desc')
+            ->setMaxResults($paginationSize)
+            ->setFirstResult(($page - 1) * $paginationSize)
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
+     * @param Version $version
+     * @return mixed
+     */
+    public function getCountByVersion(Version $version)
+    {
+        return $this->createQueryBuilder('art')
+            ->select('COUNT(art)')
+            ->andWhere('art.published = 1')
+            ->andWhere('art.version = :version')
+            ->setParameter('version', $version)
             ->orderBy('art.publishedAt', 'desc')
             ->getQuery()
             ->getSingleScalarResult();

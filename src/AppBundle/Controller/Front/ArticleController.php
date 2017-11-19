@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Front;
 
+use AppBundle\Component\Helper\Pagination;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Comment;
 use AppBundle\Repository\ArticleRepository;
@@ -50,7 +51,7 @@ class ArticleController extends Controller
         $comment->setAuthor($this->getUser());
 
         $form = $this->createFormBuilder($comment)
-            ->add('content', TextareaType::class,[
+            ->add('content', TextareaType::class, [
                 'label' => 'Laisser un commentaire',
                 'trim' => true,
             ])
@@ -101,10 +102,26 @@ class ArticleController extends Controller
             ->getRepository('AppBundle:Article')
             ->getAllCount();
 
+        $router = $this->get('router');
+        $pagination = new Pagination();
+        if ($page > 1) {
+            $pagination
+                ->setPreviousPageWording('Articles prédédents')
+                ->setPreviousPageUrl(
+                    $router->generate('article_all', ['page' => $page - 1])
+                );
+        }
+        if ($page < ceil($articleCount / $paginationSize)) {
+            $pagination
+                ->setNextPageWording('Articles suivants')
+                ->setNextPageUrl(
+                    $router->generate('article_all', ['page' => $page + 1])
+                );
+        }
+
         return $this->render('article/all.html.twig', [
             'articleList' => $articleList,
-            'page' => $page,
-            'pageMax' => ceil($articleCount / $paginationSize),
+            'pagination' => $pagination,
         ]);
 
     }
