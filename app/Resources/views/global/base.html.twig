@@ -60,7 +60,7 @@
                         </li>
                     {% endif %}
 
-                    {% if menu_category|length %}
+                    {% if  menu_category is defined and menu_category|length %}
                         <li class="dropdown">
                             <button class="dropbtn">↯ Categories</button>
                             <ul class="dropdown-content">
