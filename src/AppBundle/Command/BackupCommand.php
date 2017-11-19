@@ -8,7 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-
+/**
+ * @see http://flysystem.thephpleague.com/api/#general-usage
+ *
+ * Class BackupCommand
+ * @package AppBundle\Command
+ */
 class BackupCommand extends ContainerAwareCommand
 {
 
