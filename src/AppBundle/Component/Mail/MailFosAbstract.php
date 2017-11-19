@@ -4,6 +4,7 @@ namespace AppBundle\Component\Mail;
 
 
 use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Templating\EngineInterface;
 
@@ -45,7 +46,7 @@ abstract class MailFosAbstract implements MailInterface
     {
 
         $template = $this->parameters['confirmation.template'];
-        $url = $this->router->generate('fos_user_registration_confirm', array('token' => $user->getConfirmationToken()), true);
+        $url = $this->router->generate('fos_user_registration_confirm', array('token' => $user->getConfirmationToken()), UrlGeneratorInterface::ABSOLUTE_URL);
         $rendered = $this->templating->render($template, array(
             'user' => $user,
             'confirmationUrl' => $url
@@ -75,7 +76,7 @@ abstract class MailFosAbstract implements MailInterface
     public function sendResettingEmailMessage(UserInterface $user)
     {
         $template = $this->parameters['resetting_password.template'];
-        $url = $this->router->generate('fos_user_resetting_reset', array('token' => $user->getConfirmationToken()), true);
+        $url = $this->router->generate('fos_user_resetting_reset', array('token' => $user->getConfirmationToken()), UrlGeneratorInterface::ABSOLUTE_URL);
         $rendered = $this->templating->render($template, array(
             'user' => $user,
             'confirmationUrl' => $url

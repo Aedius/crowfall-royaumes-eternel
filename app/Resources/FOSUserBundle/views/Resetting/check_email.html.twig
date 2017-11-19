@@ -1,0 +1,18 @@
+{% extends 'global/base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+{% block body %}
+    <div id="main-container">
+
+        <article>
+            <div class="authentification">
+                <p>
+                    {{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+                </p>
+            </div>
+        </article>
+    </div>
+
+{% endblock %}
