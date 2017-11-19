@@ -20,12 +20,20 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
     /**
      * @var Article[]
      *
      * @ORM\OneToMany(targetEntity="Article", mappedBy="author")
      */
     private $articleList;
+
+    /**
+     * @var Comment[]
+     *
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="author")
+     */
+    private $commentList;
 
     public function __construct()
     {
@@ -35,11 +43,19 @@ class User extends BaseUser
     }
 
     /**
-     * @return Collection|\Traversable
+     * @return array|Collection|\Traversable
      */
     public function getArticleList(): ?\Traversable
     {
         return $this->articleList;
+    }
+
+    /**
+     * @return array|Collection|\Traversable
+     */
+    public function getCommentList(): ?\Traversable
+    {
+        return $this->commentList;
     }
 
 

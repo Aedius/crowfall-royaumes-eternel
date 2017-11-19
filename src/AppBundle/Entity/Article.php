@@ -39,7 +39,7 @@ class Article
     /**
      * @var Category
      *
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="masterArticleList")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="masterArticleList",cascade={"persist"})
      * @Assert\NotBlank()
      */
     private $masterCategory;
@@ -117,18 +117,24 @@ class Article
     /**
      * @var Version
      *
-     * @ORM\ManyToOne(targetEntity="Version", inversedBy="articleList")
+     * @ORM\ManyToOne(targetEntity="Version", inversedBy="articleList",cascade={"persist"})
      */
     private $version;
 
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="articleList")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="articleList",cascade={"persist"})
      * @Assert\NotBlank()
      */
     private $author;
 
+    /**
+     * @var Comment[]
+     *
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article")
+     */
+    private $commentList;
 
     public function __construct()
     {
@@ -297,7 +303,7 @@ class Article
      */
     public function setPublished(bool $published): Article
     {
-        if( $published && ! $this->getPublished()  ){
+        if ($published && !$this->getPublished()) {
             $this->setPublishedAt(new \DateTime());
         }
         $this->published = $published;
@@ -336,7 +342,7 @@ class Article
     public function __toString(): string
     {
         $titre = $this->getTitre();
-        return is_string($titre) ? $titre : '';
+        return \is_string($titre) ? $titre : '';
     }
 
     /**
@@ -475,5 +481,12 @@ class Article
         return $this;
     }
 
+    /**
+     * @return array|Collection|\Traversable
+     */
+    public function getCommentList(): ?\Traversable
+    {
+        return $this->commentList;
+    }
 }
 

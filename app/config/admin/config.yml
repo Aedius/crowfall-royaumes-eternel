@@ -47,6 +47,8 @@ easy_admin:
                     - 'categoryList'
                     - 'author'
                     - 'published'
+        Comment:
+            class: AppBundle\Entity\Comment
 
 bm_backup_manager:
     database:

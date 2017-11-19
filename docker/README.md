@@ -18,7 +18,7 @@ alias symfonyAdmin='dc exec php php bin/consoleAdmin --env=prod '
 alias symfonyWriter='dc exec php php bin/consoleWriter --env=prod '
 ````
 
-### install / upgrade commands :
+### install command (launch into install.sh):
 
 ````
 dc exec php composer install
@@ -50,4 +50,13 @@ docker run -it --rm -v /etc/letsencrypt:/etc/letsencrypt -v /data/letsencrypt:/d
 ````
 symfonyAdmin app:backup
 symfonyAdmin app:restore backup2017-11-14_22-54-07.sql.gz
+````
+
+### dev command :
+
+
+````
+dc exec php composer require john/doe
+dc exec php composer update
+symfony doctrine:migrations:diff 
 ````
