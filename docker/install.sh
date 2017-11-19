@@ -20,7 +20,7 @@ fi
 
 $docomp exec php composer install
 $symfony doctrine:migrations:migrate
-$symfonyAdmin ckeditor:install
+$symfonyAdmin ckeditor:install --clear=drop
 $symfony assets:install --symlink
 $symfonyAdmin assets:install --symlink
 $symfonyWriter assets:install --symlink

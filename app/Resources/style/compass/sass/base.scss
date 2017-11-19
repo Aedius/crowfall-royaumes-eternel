@@ -171,7 +171,11 @@ body {
   margin-bottom: 20px;
 }
 
-button.btn-category {
+.clear {
+  clear: both;
+}
+
+.btn-category {
   background-color: $color-btn-category;
   border: none;
   color: white;
@@ -179,6 +183,8 @@ button.btn-category {
   border-radius: 5px;
   font-size: 0.6em;
   padding: 3px 6px;
+  margin-right: 5px;
+  text-decoration: none;
 
   &:hover {
     color: $color-btn-category;
@@ -190,7 +196,7 @@ button.btn-category {
   @include global-center();
   @include content-block();
 
-  h1{
+  h1 {
     color: $color-txt-important;
   }
 
@@ -213,62 +219,121 @@ button.btn-category {
         width: $width-article;
         @include image-inbox(340px, 190px, grey);
       }
-      strong{
-        color:$color-txt-article-important;
+      strong {
+        color: $color-txt-article-important;
       }
-
-      a{
-        @include link($color-link-article,$color-link );
+      a {
+        @include link($color-link-article, $color-link);
       }
     }
 
     aside {
       float: right;
       width: 300px;
+      .image-container {
+        float: left;
+        @include image-inbox(60px, 30px, grey);
+      }
+      h4 {
+        color: $color-txt-important;
+      }
+      h4, .to-see {
+        border-bottom: solid 1px $color-txt-article;
+        padding: 10px 0;
+        font-size: 0.9em;
+      }
+      .info {
+        margin-left: 80px;
+        min-height: 45px;
+      }
+      h5 {
+        margin-bottom: 10px;
+      }
     }
+  }
+
+  #comment {
+    h3 {
+      color: $color-txt-important;
+    }
+    .comm, h3 {
+      width: $width-article;
+      border-bottom: solid 1px $color-txt-article;
+      padding: 20px;
+    }
+    .login {
+      width: $width-article;
+      padding: 20px;
+      font-size: 1.2em;
+    }
+  }
+  #form {
+    padding: 20px;
+    width: $width-article;
+    label {
+      display: block;
+      margin-bottom: 20px;
+      color: $color-txt-important;
+      font-size: 1.2em;
+    }
+
+    textarea {
+      width: 100%;
+      margin-bottom: 20px;
+      height: 100px;
+    }
+
   }
 }
 
 .content-header {
   @include global-center();
   color: $color-txt-important;
-  margin-top: 25px ;
-  margin-bottom: 25px ;
+  margin-top: 25px;
+  margin-bottom: 25px;
 
-  h1{
+  h1 {
     display: inline;
     font-size: 1.3em;
-    margin:0;
+    margin: 0;
   }
 
-  a{
-    margin-left:10px;
+  a {
+    margin-left: 10px;
   }
 }
 
-.authentification{
+.authentification {
   padding: 200px 200px;
   margin-bottom: 50px;
   text-align: center;
 
-  h1{
+  h1 {
     color: $color-txt-important;
   }
 
-  input{
-    width : 100%;
+  input {
+    width: 100%;
     margin-bottom: 10px;
   }
 
-  .alert-danger{
-    width : 100%;
+  .alert-danger {
+    width: 100%;
     margin-bottom: 10px;
     background-color: red;
     color: black;
   }
 
-  .links{
+  .links {
     margin-top: 100px;
   }
 
+}
+
+button[type="submit"] {
+  float: right;
+  padding: 5px 25px;
+  background-color: $color-bg-content;
+  border: solid 3px white;
+  color: white;
 }

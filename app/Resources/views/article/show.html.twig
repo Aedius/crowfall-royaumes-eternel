@@ -3,7 +3,7 @@
 {% block body %}
 
 
-    {% include 'category/_part/header.html.twig' with { 'category': article.masterCategory } only  %}
+    {% include 'category/_part/header.html.twig' with { 'category': article.masterCategory } only %}
 
     <div class="article-content">
 
@@ -16,23 +16,28 @@
             <p>
                 Par <a href="#">{{ article.author.username }}</a>,
                 le {{ article.getPublishedAt|date("d/m/Y à H:i") }} |
-                <a href="#">🗩 0 commentaire</a>
+                <a href="#comment">🗩 {{ article.commentList|length }}
+                    commentaire{% if article.commentList|length >1 %}s{% endif %}</a>
             </p>
 
             <aside>
-                <div>à lire aussi</div>
+                <h4>à lire aussi</h4>
                 {% for articleSide in articleSideList %}
-                    <div>
-                    <div class="image-container">
-                        <img src="/cache/140x80{{ vich_uploader_asset(articleSide, 'imageFile') }}"
-                             alt="image for : {{ articleSide.titre }}"
-                             width="140px"
-                             height="80px"
-                        />
-                    </div>
-                    <h5>{{ articleSide.titre }}</h5>
-                        Par <a href="#">{{ articleSide.author.username }}</a>,
-                        le {{ articleSide.getPublishedAt|date("d/m/Y") }}
+                    <div class="to-see">
+                        <div class="image-container">
+                            <img src="/cache/60x30{{ vich_uploader_asset(articleSide, 'imageFile') }}"
+                                 alt="image for : {{ articleSide.titre }}"
+                                 width="60"
+                                 height="30"
+                            />
+                        </div>
+                        <div class="info">
+                            <h5>
+                                <a href="{{ path('article_show', {'id': articleSide.id, 'slug': articleSide.slug}) }}">{{ articleSide.titre }}</a>
+                            </h5>
+                            Par <a href="#">{{ articleSide.author.username }}</a>,
+                            le {{ articleSide.getPublishedAt|date("d/m/Y") }}
+                        </div>
                     </div>
                 {% endfor %}
             </aside>
@@ -42,19 +47,47 @@
                 <div class="image-container">
                     <img src="/cache/340x190{{ vich_uploader_asset(article, 'imageFile') }}"
                          alt="image for : {{ article.titre }}"
-                         width="340px"
-                         height="190px"
+                         width="340"
+                         height="190"
                     />
                 </div>
                 {{ article.content|raw }}
 
-
             </article>
-            <!-- /Post Info -->
+
+        </section>
+        <section id="comment">
+            <h3>{{ commentList|length }} Commentaire{% if commentList|length >1 %}s{% endif %}</h3>
+
+            {% for comment in commentList %}
+                <div class="comm">
+                    <p>
+                        par <a href="#">{{ comment.author.username }}</a>
+                        , le {{ comment.date|date("d/m/Y") }}
+                    </p>
+                    <p>
+                        {{ comment.content|nl2br }}
+                    </p>
+                </div>
+            {% endfor %}
+
+            <div>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    {{ form_start(commentForm) }}
+                    {{ form_widget(commentForm) }}
+                    {{ form_end(commentForm) }}
+                {% else %}
+                    <div class="login">
+                        <a href="{{ path('fos_user_security_login') }}">Connectez vous pour pouvoir laisser un
+                            commentaire</a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="clear"></div>
 
         </section>
     </div>
-
+    <div class="spacer"></div>
 
 
 {% endblock %}

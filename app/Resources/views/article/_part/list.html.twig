@@ -21,7 +21,7 @@
 
                 <div class="img-container">
                     <img src="/cache/240x130{{ vich_uploader_asset(article, 'imageFile') }}"
-                         width="240px" height="130px"
+                         width="240" height="130"
                          alt="image for : {{ article.titre }}"/>
                 </div>
                 <div class="info-container">
@@ -40,7 +40,8 @@
                     <p>
                         Par <a href="#">{{ article.author.username }}</a>,
                         le {{ article.getPublishedAt|date("d/m/Y à H:i") }} |
-                        <a href="#">🗩 0 commentaire</a>
+                        <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}#comment">🗩 {{ article.commentList|length }}
+                            commentaire{% if article.commentList|length >1 %}s{% endif %}</a>
 
                     </p>
                     <p> {{ article.content|striptags|slice(0, 300)|raw }} ...
@@ -63,13 +64,13 @@
             {% if page < pageMax %}
                 <section>
                     <div class="pagination">
-                {% if all %}
-                    <a href="{{ path('article_all', { 'page': page +1}) }}">
-                        Page Suivante ></a>
-                {% else %}
-                        <a href="{{ path('category_show', {'id': category.id, 'slug': category.slug, 'page': page + 1}) }}">Page
-                            Suivante ></a>
-                    {% endif %}
+                        {% if all %}
+                            <a href="{{ path('article_all', { 'page': page +1}) }}">
+                                Page Suivante ></a>
+                        {% else %}
+                            <a href="{{ path('category_show', {'id': category.id, 'slug': category.slug, 'page': page + 1}) }}">Page
+                                Suivante ></a>
+                        {% endif %}
                     </div>
                 </section>
             {% endif %}

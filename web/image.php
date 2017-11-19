@@ -48,9 +48,9 @@ switch ($resizeType) {
         $rszWidthGoal = 240;
         $rszHeightGoal = 130;
         break;
-    case '140x80':
-        $rszWidthGoal = 140;
-        $rszHeightGoal = 80;
+    case '60x30':
+        $rszWidthGoal = 60;
+        $rszHeightGoal = 30;
         break;
     default:
         /**
@@ -62,18 +62,18 @@ switch ($resizeType) {
 
 $im = new Imagick();
 $im->readImage($filename);
-switch($extension){
+switch ($extension) {
     case 'png':
         $im->setImageFormat('png');
         break;
     case 'jpg':
     case 'jpeg':
-    $im->setImageFormat('jpeg');
+        $im->setImageFormat('jpeg');
         break;
 }
 $im->resizeImage($rszWidthGoal, $rszHeightGoal, Imagick::FILTER_LANCZOS, 1);
 
-if(!file_exists(dirname($cacheFileName))) {
+if (!file_exists(dirname($cacheFileName))) {
     mkdir(dirname($cacheFileName), 0777, true);
 }
 
@@ -84,7 +84,6 @@ header('Cache-Control: max-age=604800, public');
 $now = time();
 header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $now) . ' GMT');
 header('Expires: ' . gmdate('D, d M Y H:i:s', $now + 604800 /* 7 days */) . ' GMT');
-
 
 
 echo $im->getImageBlob();
