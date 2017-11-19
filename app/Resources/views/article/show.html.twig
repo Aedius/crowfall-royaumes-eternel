@@ -14,7 +14,7 @@
             <h1>{{ article.titre }}</h1>
 
             <p>
-                Par <a href="#">{{ article.author.username }}</a>,
+                Par <a href="{{ path('user_article_show', {'id': article.author.id, 'slug': article.author.usernameCanonical }) }}">{{ article.author.username }}</a>,
                 le {{ article.getPublishedAt|date("d/m/Y à H:i") }} |
                 <a href="#comment">🗩 {{ article.commentList|length }}
                     commentaire{% if article.commentList|length >1 %}s{% endif %}</a>
@@ -35,7 +35,7 @@
                             <h5>
                                 <a href="{{ path('article_show', {'id': articleSide.id, 'slug': articleSide.slug}) }}">{{ articleSide.titre }}</a>
                             </h5>
-                            Par <a href="#">{{ articleSide.author.username }}</a>,
+                            Par <a href="{{ path('user_article_show', {'id': articleSide.author.id, 'slug': articleSide.author.usernameCanonical }) }}">{{ articleSide.author.username }}</a>,
                             le {{ articleSide.getPublishedAt|date("d/m/Y") }}
                         </div>
                     </div>
@@ -62,7 +62,7 @@
             {% for comment in commentList %}
                 <div class="comm">
                     <p>
-                        par <a href="#">{{ comment.author.username }}</a>
+                        par <a href="{{ path('user_article_show', {'id': comment.author.id, 'slug': comment.author.usernameCanonical }) }}">{{ comment.author.username }}</a>
                         , le {{ comment.date|date("d/m/Y") }}
                     </p>
                     <p>

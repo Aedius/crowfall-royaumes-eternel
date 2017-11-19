@@ -1,0 +1,12 @@
+{% extends 'global/base.html.twig' %}
+
+{% block body %}
+
+    {% include 'user/_part/header.html.twig' with { 'user': user } only %}
+
+    {% include ':article/_part:list.html.twig' with {
+        'articleList': articleList,
+        'pagination': pagination
+    } only %}
+
+{% endblock %}

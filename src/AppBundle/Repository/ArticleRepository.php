@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Category;
+use AppBundle\Entity\User;
 use AppBundle\Entity\Version;
 use Doctrine\ORM\EntityRepository;
 
@@ -84,6 +85,41 @@ class ArticleRepository extends EntityRepository
             ->andWhere('art.published = 1')
             ->andWhere('art.version = :version')
             ->setParameter('version', $version)
+            ->orderBy('art.publishedAt', 'desc')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * @param User $user
+     * @param int $paginationSize
+     * @param int $page
+     * @return mixed
+     */
+    public function getByAuthor(User $user, $paginationSize, $page)
+    {
+        return $this->createQueryBuilder('art')
+            ->andWhere('art.published = 1')
+            ->andWhere('art.author = :author')
+            ->setParameter('author', $user)
+            ->orderBy('art.publishedAt', 'desc')
+            ->setMaxResults($paginationSize)
+            ->setFirstResult(($page - 1) * $paginationSize)
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function getCountByAuthor(User $user)
+    {
+        return $this->createQueryBuilder('art')
+            ->select('COUNT(art)')
+            ->andWhere('art.published = 1')
+            ->andWhere('art.author = :author')
+            ->setParameter('author', $user)
             ->orderBy('art.publishedAt', 'desc')
             ->getQuery()
             ->getSingleScalarResult();
