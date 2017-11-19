@@ -14,6 +14,8 @@ easy_admin:
             class: AppBundle\Entity\User
         Version:
             class: AppBundle\Entity\Version
+        Quickie:
+            class: AppBundle\Entity\Quickie
         Article:
             class: AppBundle\Entity\Article
             list:
