@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Front;
 use AppBundle\Component\Helper\Pagination;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Quickie;
+use AppBundle\Entity\Slide;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\DateTime;
@@ -53,10 +54,17 @@ class IndexController extends BaseController
             }
         }
 
+        $slideList = $this->getDoctrine()
+            ->getRepository(Slide::class)
+            ->findBy([
+                'published' => true
+            ]);
+
         return $this->render('index.html.twig', [
             'articleList' => $articleList,
             'pagination' => $pagination,
             'quickie' => $quickie,
+            'slideList' => $slideList
         ]);
     }
 

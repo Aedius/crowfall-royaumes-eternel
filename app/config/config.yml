@@ -8,6 +8,7 @@ imports:
 parameters:
     locale: fr
     app.path.article_images : '/upload/article/image'
+    app.path.slide_images : '/upload/slide/image'
     app.pagination : 7
 
 framework:
@@ -82,3 +83,6 @@ vich_uploader:
         article_image:
             uri_prefix:         '%app.path.article_images%'
             upload_destination: '%kernel.root_dir%/../web/upload/article/image'
+        slide_image:
+            uri_prefix:         '%app.path.slide_images%'
+            upload_destination: '%kernel.root_dir%/../web/upload/slide/image'
