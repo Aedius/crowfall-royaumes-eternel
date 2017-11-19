@@ -1,28 +1,75 @@
 {% extends 'global/base.html.twig' %}
 
 {% block body %}
-    <div id="slide">
-        <div class="slide-container">
-            {# change this asap #}
-            <img src="/cache/1190x440{{ asset('upload/wallpaper.jpg') }}" width="1190" height="440"
-                 alt="test"
-            />
+    {% if slideList|length %}
+
+        <div id="slide">
+
+            {% for slide in slideList %}
+                <div class="slide-container">
+                    <img src="/cache/1190x440{{ vich_uploader_asset(slide, 'imageFile') }}"
+                         alt="image for : {{ slide.content }}"
+                         width="1190"
+                         height="440"
+                    />
+                    <div class="slide-content">
+                        {% if slide.url %}
+                            <a href="{{ slide.url }}">
+                                {{ slide.content|nl2br }}
+                            </a>
+                        {% else %}
+                            {{ slide.content|nl2br }}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+
+            <button class="slide-minus" onclick="plusDivs(-1)">🢦</button>
+            <button class="slide-plus" onclick="plusDivs(1)">🢧</button>
+
         </div>
-    </div>
-    <div id="news">
-        {% if quickie %}
+    {% endif %}
+    {% if quickie %}
+        <div id="news">
             <a href="{{ quickie.url }}">
                 {{ quickie.content|nl2br }}
             </a>
-        {% else %}
-            <a href="https://discord.gg/4zbKY5Z">
-                Bienvenue sur le site de la communauté francophone de Crowfall<br/>
-                Rejoins nous sur Discord
-            </a>
-        {% endif %}
-    </div>
+        </div>
+    {% endif %}
     <div class="spacer"></div>
 
     {% include ':article/_part:list.html.twig' with { 'articleList': articleList, 'pagination': pagination  } only %}
 
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("slide-container");
+            if (n > x.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = x.length
+            }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[slideIndex - 1].style.display = "block";
+        }
+
+        function carousel() {
+            plusDivs(1);
+        }
+
+        setTimeout(carousel, 5000);
+    </script>
 {% endblock %}

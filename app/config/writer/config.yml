@@ -43,3 +43,22 @@ easy_admin:
                     - 'published'
         Quickie:
             class: AppBundle\Entity\Quickie
+        Slide:
+            class: AppBundle\Entity\Slide
+            list:
+                fields:
+                    - 'published'
+                    - 'url'
+                    - { property: 'image', type: 'image', base_path: '%app.path.slide_images%' }
+            show:
+                fields:
+                    - 'published'
+                    - 'url'
+                    - 'content'
+                    - { property: 'image', type: 'image', base_path: '%app.path.slide_images%' }
+            form:
+                fields:
+                    - 'url'
+                    - { property: 'imageFile', type: 'vich_image' }
+                    - 'content'
+                    - 'published'
