@@ -2,7 +2,7 @@
 
 source .env
 
-echo $ENV
+echo "start install on $ENV"
 
 if [ $ENV = "PROD" ]
 then
@@ -27,3 +27,6 @@ $symfonyWriter assets:install --symlink
 $symfony cache:clear --no-warmup
 $symfonyAdmin cache:clear --no-warmup
 $symfonyWriter cache:clear --no-warmup
+
+
+echo "install on $ENV done"

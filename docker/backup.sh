@@ -2,7 +2,7 @@
 
 source .env
 
-echo $ENV
+echo "start backup for $ENV"
 
 if [ $ENV = "PROD" ]
 then
@@ -14,3 +14,6 @@ else
 fi
 
 $symfonyAdmin app:backup
+
+
+echo "backup on $ENV done"
