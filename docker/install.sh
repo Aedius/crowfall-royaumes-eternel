@@ -17,7 +17,7 @@ else
     symfonyWriter="$docomp exec php php bin/consoleWriter --env=dev "
 fi
 
-
+$docomp up --build --force-recreate -d
 $docomp exec php composer install
 $symfony doctrine:migrations:migrate --no-interaction
 $symfonyAdmin ckeditor:install --clear=skip
