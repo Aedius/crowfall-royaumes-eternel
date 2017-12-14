@@ -62,6 +62,7 @@ body {
           display: none;
           position: absolute;
           top: 55px;
+          z-index: 99;
           @include content-block();
 
           li {
