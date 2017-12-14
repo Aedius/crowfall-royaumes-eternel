@@ -40,25 +40,31 @@
             <nav>
                 <ul>
                     {# inverse order because of float : right #}
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <li>
-                            <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
-                        </li>
-                        {% if is_granted("ROLE_ADMIN") %}
-                            <li>
-                                <a href="/admin/">Administration</a>
-                            </li>
-                        {% elseif is_granted("ROLE_WRITER") %}
-                            <li>
-                                <a href="/writer/">Admin</a>
-                            </li>
-                        {% endif %}
+                    <li class="dropdown">
+                        <button class="dropbtn">👤 Compte</button>
+                        <ul class="dropdown-content">
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                {% if is_granted("ROLE_ADMIN") %}
+                                    <li>
+                                        <a href="/admin/">Administration</a>
+                                    </li>
+                                {% elseif is_granted("ROLE_WRITER") %}
+                                    <li>
+                                        <a href="/writer/">Admin</a>
+                                    </li>
+                                {% endif %}
+                                <li>
+                                    <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </li>
 
-                    {% else %}
-                        <li>
-                            <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-                        </li>
-                    {% endif %}
+
 
                     {% if  menu_category is defined and menu_category|length %}
                         <li class="dropdown">
