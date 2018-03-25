@@ -95,3 +95,13 @@ oneup_flysystem:
     filesystems:
         dropbox:
             adapter: dropbox_adapter
+
+ivory_ck_editor:
+    default_config: my_config
+    configs:
+        my_config:
+            extraPlugins: "youtube"
+    plugins:
+        youtube:
+            path:     "/ckeditor/plugins/youtube"
+            filename: "plugin.js"
