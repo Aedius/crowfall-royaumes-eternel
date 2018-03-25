@@ -103,5 +103,5 @@ ivory_ck_editor:
             extraPlugins: "youtube"
     plugins:
         youtube:
-            path:     "/ckeditor/plugins/youtube"
+            path:     "/ckeditor/plugins/youtube/"
             filename: "plugin.js"
