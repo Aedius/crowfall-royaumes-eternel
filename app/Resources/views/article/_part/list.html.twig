@@ -34,8 +34,8 @@
                     <p>
                         Par <a href="{{ path('user_article_show', {'id': article.author.id, 'slug': article.author.usernameCanonical }) }}">{{ article.author.username }}</a>,
                         le {{ article.getPublishedAt|date("d/m/Y à H:i") }} |
-                        <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}#comment">🗩 {{ article.commentList|length }}
-                            commentaire{% if article.commentList|length >1 %}s{% endif %}</a>
+                        {% if article.commentList|length >1 %}<a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}#comment">🗩 {{ article.commentList|length }}
+                            commentaires</a>{% endif %}
 
                     </p>
                     <p> {{ article.content|striptags|slice(0, 300)|raw }} ...
