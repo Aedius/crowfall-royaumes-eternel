@@ -9,6 +9,8 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class CacheClearCommand extends CacheClearCommandSymfony
 {
+    protected static $defaultName = 'cache:clear';
+
     /**
      * {@inheritdoc}
      */
