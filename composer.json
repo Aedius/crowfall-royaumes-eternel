@@ -12,16 +12,6 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "repositories": [
-      {
-        "type": "vcs",
-        "url": "https://github.com/aedius/symfony",
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/Aedius/symfony/archive/master.zip"
-        }
-      }
-    ],
     "require": {
         "php": ">=7.0",
         "symfony/symfony": "3.*",
@@ -68,11 +58,6 @@
             "@symfony-scripts"
         ]
     },
-    "config": {
-        "platform": {
-            "php": "7.0"
-        }
-    },
     "extra": {
         "symfony-app-dir": "app",
         "symfony-bin-dir": "bin",
@@ -82,9 +67,6 @@
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
-        },
-        "branch-alias": {
-            "dev-master": "3.2-dev"
         }
     }
 }
