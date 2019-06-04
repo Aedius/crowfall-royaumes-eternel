@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "45f5c960aa72906d4d5f78b811f63984",
+    "content-hash": "5a3fdf6b83831de4029687051f152c25",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2660,16 +2660,16 @@
         },
         {
             "name": "mailgun/mailgun-php",
-            "version": "2.8.0",
+            "version": "2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mailgun/mailgun-php.git",
-                "reference": "da5ccde2a7a4f823f1004e83aa05424402bcd3a5"
+                "reference": "4af0346851914ae0d9a58bf9ddf17eb48f6498c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mailgun/mailgun-php/zipball/da5ccde2a7a4f823f1004e83aa05424402bcd3a5",
-                "reference": "da5ccde2a7a4f823f1004e83aa05424402bcd3a5",
+                "url": "https://api.github.com/repos/mailgun/mailgun-php/zipball/4af0346851914ae0d9a58bf9ddf17eb48f6498c8",
+                "reference": "4af0346851914ae0d9a58bf9ddf17eb48f6498c8",
                 "shasum": ""
             },
             "require": {
@@ -2708,7 +2708,7 @@
                 }
             ],
             "description": "The Mailgun SDK provides methods for all API functions.",
-            "time": "2019-01-06T07:11:37+00:00"
+            "time": "2019-02-02T07:14:32+00:00"
         },
         {
             "name": "mikemccabe/json-patch-php",
@@ -3146,16 +3146,16 @@
         },
         {
             "name": "php-http/client-common",
-            "version": "1.9.0",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/client-common.git",
-                "reference": "9c21b6058caafdf2fcc99a0cabdf31b3ecb33961"
+                "reference": "0e156a12cc3e46f590c73bf57592a2252fc3dc48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/client-common/zipball/9c21b6058caafdf2fcc99a0cabdf31b3ecb33961",
-                "reference": "9c21b6058caafdf2fcc99a0cabdf31b3ecb33961",
+                "url": "https://api.github.com/repos/php-http/client-common/zipball/0e156a12cc3e46f590c73bf57592a2252fc3dc48",
+                "reference": "0e156a12cc3e46f590c73bf57592a2252fc3dc48",
                 "shasum": ""
             },
             "require": {
@@ -3203,7 +3203,7 @@
                 "http",
                 "httplug"
             ],
-            "time": "2019-01-03T10:59:55+00:00"
+            "time": "2019-02-02T07:03:15+00:00"
         },
         {
             "name": "php-http/discovery",
