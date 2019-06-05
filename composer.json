@@ -34,7 +34,7 @@
         "javiereguiluz/easyadmin-bundle": "^1.17",
         "backup-manager/symfony":"^1.1",
         "egeloen/ckeditor-bundle": "^6.0",
-        "oneup/flysystem-bundle": "^3.0",
+        "oneup/flysystem-bundle": "^3.1",
         "spatie/flysystem-dropbox": "^1.0"
     },
     "require-dev": {
