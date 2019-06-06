@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2450355ea3a8f0226b34b7fcdd0d249a",
+    "content-hash": "48d0c2de4cb4ca49269703d09bdfe8bf",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -5344,16 +5344,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.7.0",
+            "version": "v2.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "57bd838bb7a9368ecf8b19bbe9788090502d1615"
+                "reference": "84a463403da1c81afbcedda8f0e788c78bd25a79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/57bd838bb7a9368ecf8b19bbe9788090502d1615",
-                "reference": "57bd838bb7a9368ecf8b19bbe9788090502d1615",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/84a463403da1c81afbcedda8f0e788c78bd25a79",
+                "reference": "84a463403da1c81afbcedda8f0e788c78bd25a79",
                 "shasum": ""
             },
             "require": {
@@ -5364,12 +5364,12 @@
             "require-dev": {
                 "psr/container": "^1.0",
                 "symfony/debug": "^2.7",
-                "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
+                "symfony/phpunit-bridge": "^3.4.19|^4.1.8|^5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.11-dev"
                 }
             },
             "autoload": {
@@ -5407,7 +5407,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-03-12T12:46:23+00:00"
+            "time": "2019-06-05T11:17:07+00:00"
         },
         {
             "name": "vich/uploader-bundle",
