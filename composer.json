@@ -27,7 +27,7 @@
         "twig/twig": "^2.11.2",
         "friendsofsymfony/user-bundle": "^2.0",
         "doctrine/doctrine-migrations-bundle": "^1.2",
-        "vich/uploader-bundle": "^1.6",
+        "vich/uploader-bundle": "^1.9",
         "mailgun/mailgun-php": "^2.8",
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/message": "^1.6",
