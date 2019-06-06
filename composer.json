@@ -40,7 +40,7 @@
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.4",
-        "phpmailer/phpmailer": "^5.2"
+        "phpmailer/phpmailer": "^6.0"
     },
     "scripts": {
         "symfony-scripts": [
