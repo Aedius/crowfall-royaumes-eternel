@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a3fdf6b83831de4029687051f152c25",
+    "content-hash": "2450355ea3a8f0226b34b7fcdd0d249a",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2935,16 +2935,16 @@
         },
         {
             "name": "oneup/flysystem-bundle",
-            "version": "3.0.3",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/1up-lab/OneupFlysystemBundle.git",
-                "reference": "f144242c765e4d3e0a20551f71e76b33cc0a2c0f"
+                "reference": "697cb9bdf86b578ac77932511375ab8f29f3c5d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/1up-lab/OneupFlysystemBundle/zipball/f144242c765e4d3e0a20551f71e76b33cc0a2c0f",
-                "reference": "f144242c765e4d3e0a20551f71e76b33cc0a2c0f",
+                "url": "https://api.github.com/repos/1up-lab/OneupFlysystemBundle/zipball/697cb9bdf86b578ac77932511375ab8f29f3c5d8",
+                "reference": "697cb9bdf86b578ac77932511375ab8f29f3c5d8",
                 "shasum": ""
             },
             "require": {
@@ -2996,7 +2996,10 @@
             "autoload": {
                 "psr-4": {
                     "Oneup\\FlysystemBundle\\": ""
-                }
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -3024,7 +3027,7 @@
                 "abstraction",
                 "filesystem"
             ],
-            "time": "2018-12-03T08:14:22+00:00"
+            "time": "2019-04-26T13:11:17+00:00"
         },
         {
             "name": "pagerfanta/pagerfanta",
