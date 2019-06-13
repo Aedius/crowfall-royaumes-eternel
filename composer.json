@@ -35,7 +35,7 @@
         "backup-manager/symfony":"^2.2",
         "egeloen/ckeditor-bundle": "^6.0",
         "oneup/flysystem-bundle": "^3.1",
-        "spatie/flysystem-dropbox": "^1.0"
+        "spatie/flysystem-dropbox": "^1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
