@@ -1,4 +1,4 @@
-version: '2'
+version: '3.7'
 services:
     db:
         image: mysql
@@ -9,11 +9,17 @@ services:
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        deploy:
+          restart_policy:
+            condition: always
     php:
         build: php7-fpm
         volumes:
             - ${SYMFONY_APP_PATH}:/var/www/symfony
             - ./logs/symfony:/var/www/symfony/app/logs
+        deploy:
+          restart_policy:
+            condition: always
     compass:
         image: antonienko/compass-watch
         command: watch --poll /src/compass
